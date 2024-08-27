@@ -1,0 +1,39 @@
+﻿<template>
+    <div slot="content">
+
+
+        <div id="plotname-section" class="row" style="justify-content: center;">
+            <div class="col-5">Plot Name <span class="require">*</span> :</div>
+            <div class="col-5" validation-errors.from-view="viewModel.SelectedPlotErrors" class.bind="viewModel.SelectedPlotErrors.length==0? '':'select2-is-invalid'">
+                <select2 search-auto-complete-function.bind="(e) => viewModel.FindPlotNameAutoComplete(e.params, e.success, e.failure)"
+                         calculate-item-id="Id"
+                         calculate-item-text="Name"
+                         name="SelectUser"
+                         is-multiple.bind="false"
+                         placeholder="Search"
+                         selected-items.bind="viewModel.SelectedPlot & validate"
+                         disabled.bind="!IsEditing">
+                </select2>
+                <span repeat.for="error of SelectedPlotErrors" class="require">${error.result.message}</span>
+            </div>            
+        </div>
+
+        <div id="sensorid-section" class="row mt-3" style="justify-content: center;">
+            <div class="col-5">Sensor ID <span class="require">*</span> : </div>
+            <div class="col-5">
+                <select class.bind="DeviceIdErrors.length == 0 ? 'form-control':'form-control is-invalid'" value.bind="viewModel.DeviceId & validate" validation-errors.from-view="DeviceIdErrors" disabled.bind="!IsEditing">
+                    <option value.bind="">-- กรุณาเลือก --</option>
+                    <option repeat.for="item of viewModel.Parent.DeviceMasterDatas" model.bind="item.Id" selected>${item.DeviceNo}</option>
+                </select>
+                <span repeat.for="error of DeviceIdErrors" class="require">${error.result.message}</span>
+            </div>
+        </div>
+
+        <div id="sensorcoordinate-section" class="row mt-3" style="justify-content: center;">
+            <div class="col-5">Sensor coordinate <span class="require">*</span> : </div>
+            <div class="col-5"><input type="text" class="form-control" value.bind="viewModel.Api" disabled></div>
+        </div>
+
+
+    </div>
+</template>

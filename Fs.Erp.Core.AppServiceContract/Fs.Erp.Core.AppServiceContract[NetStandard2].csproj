@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Config\**" />
+    <EmbeddedResource Remove="Config\**" />
+    <None Remove="Config\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="EducationAndFeeManagerServiceCriteria.cs" />
+    <Compile Remove="EducationFeeData.cs" />
+    <Compile Remove="EducationFeeUpdateRequest.cs" />
+    <Compile Remove="EducationInstitueData.cs" />
+    <Compile Remove="EducationLevelData.cs" />
+    <Compile Remove="EducationLevelUpdateRequest.cs" />
+    <Compile Remove="IEducationAndFeeManagerService.cs" />
+    <Compile Remove="IEducationInstitueService.cs" />
+    <Compile Remove="IMenuService.cs" />
+    <Compile Remove="IResourceRelationService.cs" />
+    <Compile Remove="IResourceService.cs" />
+    <Compile Remove="IScopeCheckService.cs" />
+    <Compile Remove="ISecurityService.cs" />
+    <Compile Remove="ISpecialRoleService.cs" />
+    <Compile Remove="IWebAuthenticationService.cs" />
+    <Compile Remove="IWebFormAuthenticationService.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+    <Compile Remove="ScopeCriteria01.cs" />
+    <Compile Remove="ScopeData01.cs" />
+    <Compile Remove="ScopeUpdateRequest.cs" />
+    <Compile Remove="Scope_Role_GroupData01.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Fs.Erp.Core.AppServiceContract%28NetStandard%29.project.json" />
+    <None Remove="Fs.Erp.Core.AppServiceContract%28NetStandard%29.project.lock.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fs.Core.Validation.Entlib\Fs.Core.Validation.Entlib[NetStandard2].csproj" />
+    <ProjectReference Include="..\Fs.Core\Fs.Core[NetStandard2].csproj" />
+    <ProjectReference Include="..\Fs.Erp.Core\Fs.Erp.Core[NetStandard2].csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

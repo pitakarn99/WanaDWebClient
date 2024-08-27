@@ -1,0 +1,11 @@
+{
+  "Test": {
+    "Code": "รหัส",
+    "Name": "ชื่อ",
+    "Price": "ราคา",
+    "Action": "การดำเนินการ",
+    "Search": "ค้นหา",
+    "Add": "เพิ่ม",
+    "testInterpolation": "{{what}} เท่ากับ {{how}}"
+  }
+}

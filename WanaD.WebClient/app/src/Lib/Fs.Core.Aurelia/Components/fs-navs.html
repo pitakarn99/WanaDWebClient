@@ -1,0 +1,23 @@
+﻿eiei
+<div role="tablist">
+
+    <div class="${vertical ? 'row' : ''}">
+
+
+        <div class="${vertical ? navsVerticalClass : ''}">
+            <nav class="nav ${bePills ? 'nav-pills' : ''} ${navsClass} ${vertical ? 'flex-column' : ''} ${beTab ? 'nav-tabs' : ''} ${fill ? 'nav-fill' : ''} ${justify ? 'nav-justified' : ''}"
+                 css="${navsStyle}">
+                <au-slot></au-slot>
+
+            </nav>
+        </div>
+
+
+        <div class="${vertical ? contentVerticalClass : ''}">
+            <div class="tab-content ${contentClass}" css="${contentStyle}">
+            </div>
+        </div>
+    </div>
+
+</div>
+eiei

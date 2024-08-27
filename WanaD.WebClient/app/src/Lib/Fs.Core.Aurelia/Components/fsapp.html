@@ -1,0 +1,37 @@
+﻿<require from="bootstrap/dist/css/bootstrap.min.css"></require>
+<!--<require from="Lib/Fs.Core.Aurelia/Components/loading-indicator"></require>-->
+
+<div
+  style.bind="(router.isNavigating || isLoading) ? 'pointer-events: none;' : ''"
+  class="fsapp_routerview"
+>
+  <router-view></router-view>
+</div>
+
+<div
+  style.bind="(router.isNavigating || isLoading) ? 'pointer-events: none; position:fixed;
+    width:100%; left:0;right:0;top:0;bottom:0; background-color: rgba(255,255,255,0.7); z-index:9999;' : ''"
+>
+  <div
+    class="spinner-border centered"
+    show.bind="router.isNavigating || isLoading"
+    style="
+      z-index: 10000;
+      width: 100px;
+      height: 100px;
+      border: 0.8em solid currentColor;
+      border-right-color: transparent;
+    "
+  >
+    <span></span>
+  </div>
+</div>
+
+<style>
+  .centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+  }
+</style>

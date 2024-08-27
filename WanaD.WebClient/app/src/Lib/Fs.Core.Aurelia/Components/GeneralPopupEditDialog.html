@@ -1,0 +1,36 @@
+﻿<div class="modal" style="display: block">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">${Header}</h5>
+      </div>
+      <div class="modal-body">
+        <au-compose template="${view}" component.bind="viewModel"></au-compose>
+      </div>
+      <div class="modal-footer">
+          <input type="button"
+                 value="Cancel"
+                 class="${BtnCancelClass}"
+                 show.bind="viewModel.IsEditing"
+                 click.trigger="CancelEditAsync()" />
+          <input type="button"
+                 value="Close"
+                 class="${BtnCloseClass}"
+                 show.bind="!viewModel.IsEditing"
+                 click.trigger="CancelAsync()" />
+          &nbsp;
+          <input type="button"
+                 value="Save"
+                 class="${BtnSaveClass}"
+                 show.bind="viewModel.IsEditing"
+                 click.trigger="UpdateAsync()" />
+          <input type="button"
+                 value="Edit"
+                 class="${BtnEditorClass}"
+                 show.bind="!viewModel.IsEditing"
+                 click.trigger="EditAsync()" />
+
+      </div>
+    </div>
+  </div>
+</div>

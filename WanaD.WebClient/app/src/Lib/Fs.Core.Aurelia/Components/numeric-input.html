@@ -1,0 +1,14 @@
+﻿<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+
+<input
+  ref="inputElement"
+  type="text"
+  class="form-control"
+  placeholder.bind="placeholder"
+  class.bind="alignClass + ' ' + customClass"
+  style.bind="customStyle"
+  value.bind="displayNumber & updateTrigger:'input'"
+  blur.trigger="blur()"
+  focus.trigger="focus()"
+  disabled.bind="disabled"
+/>

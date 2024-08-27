@@ -1,0 +1,81 @@
+﻿<require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+
+<require from="Lib/Fs.Core.Aurelia/Components/fs-navs"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-nav-item"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-nav-item-header"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-nav-item-body"></require>
+
+<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+
+<require from="Lib/Fs.Core.Aurelia/Components/select2"></require>
+
+<div class="card card-all">
+    <div class="kt-portlet__head-label">
+        <h3 class="kt-portlet__head-title">
+            Group
+        </h3>
+    </div>
+    <div class="row">
+        <h3 class="sub-kt-portlet__head-title">General Information :</h3>
+
+        <div class="row">
+            <label class="col-1" for="Name">Name <span class="require">*</span></label>
+            <div class="col-3">
+                <div>
+                    <input style="height:100% !important ; " class.bind="NameErrors.length==0? 'form-control':'form-control is-invalid' "validation-errors.from-view="NameErrors"
+                           value.bind="Name & validate" disabled.bind="!$this.IsEditing" />
+                    <span repeat.for="error of NameErrors" class="require">${error.result.message}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <label class="col-1" for="Name">Active</label>
+            <div class="col-2">
+                <span style="width: 40px">
+                    <label class=" kt-checkbox kt-checkbox--single kt-checkbox--solid">
+                        <input type="checkbox" class="align-middle" id="IsActive" checked.bind="IsActive" disabled.bind="!$this.IsEditing" /><span></span>
+                    </label>
+                </span>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="d-flex">
+                <button class="btn btn-primary" click.trigger="Back()" show.bind="!$this.IsEditing">Back</button>
+                <div class="mx-auto"></div>
+                <button class="btn btn-primary me-2" disabled.bind="$this.IsEditing" show.bind="!$this.IsEditing" click.trigger="BeginEdit()">Edit</button>
+
+                <button class="btn btn-outline-secondary me-2" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="CancelAsync()">Cancel</button>
+                <button class="btn btn-primary " disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="SaveData()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+
+<div class="none-card-all">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active font-18px" id="UserSearchVM-tab" data-bs-toggle="tab" data-bs-target="#UserSearchVM-tab-pane" type="button" role="tab" aria-controls="UserSearchVM-tab-pane" aria-selected="true">User</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link font-18px" id="PermissionView-tab" data-bs-toggle="tab" data-bs-target="#PermissionView-tab-pane" type="button" role="tab" aria-controls="PermissionView-tab-pane" aria-selected="false">Permission</button>
+        </li>
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="UserSearchVM-tab-pane" role="tabpanel" aria-labelledby="UserSearchVM-tab" tabindex="0">
+            <au-compose if.bind="UserSearchVM != null" component.bind="UserSearchVM" scope-behavior="scoped"></au-compose>
+        </div>
+        <div class="tab-pane fade" id="PermissionView-tab-pane" role="tabpanel" aria-labelledby="PermissionView-tab" tabindex="0">
+            <au-compose if.bind="PermissionVM != null" component.bind="PermissionVM" scope-behavior="scoped"></au-compose>
+        </div>
+
+    </div>
+</div>
+

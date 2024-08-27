@@ -1,0 +1,65 @@
+﻿<require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+
+<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+
+<div slot="content">
+    <div class="kt-portlet__head-label" slot="header-name">
+        <h3 class="kt-portlet__head-title">
+            User Group
+        </h3>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-1 align-middle">Name</div>
+                <div class="col-2">
+                    <input class="form-control" style="height:70%" value.bind="Name" />
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:20px;">
+                <div class="col-10">
+                    <button class="btn btn-warning" disabled.bind="HasEditingChilds == true" click.trigger="SearchAsync()">Search</button>
+                    <button class="btn btn-primary" disabled.bind="HasEditingChilds == true" click.trigger="Clear()">Clear</button>
+                    <button class="btn btn-success" disabled.bind="HasEditingChilds == true" click.trigger="AddCommand()">Add</button>
+                </div>
+            </div>
+            <div class="data-allpage">
+                <div class="container kt-datatable__table">
+                    <div class="row">
+                        <table class="table table-striped- table-bordered table-hover table-checkable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <fs-grid-header display-name="Name" sorting-name="Name"></fs-grid-header>
+                                    </th>
+                                    <th>
+                                        <fs-grid-header display-name="Active" sorting-name="IsActive"></fs-grid-header>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="data-body" repeat.for="item of SearchResultCollectionView"
+                                    class.bind="item === CurrentItem ? 'selected' : ''">
+                                    <td class="kt-datatable__cell">
+                                        <div show.bind="!item.IsEditing" class="align-middle">${item.Name}</div>
+                                    </td>
+                                    <td class="kt-datatable__cell">
+                                        <div show.bind="!item.IsEditing" class="align-middle">${item.IsActive == true ? 'Active': 'InActive'}</div>
+                                    </td>
+                                    <td class="kt-datatable__cell">
+                                        <button class="align-middle btn btn-primary" disabled.bind="!($parent.CurrentItem == null || ($parent.CurrentItem != null && !$parent.CurrentItem.IsEditing)) && !$parent.HasEditingChilds" show.bind="!item.IsEditing" click.trigger="item.EditUserUrl(item)">View</button>
+                                        <button class="align-middle btn btn-warning" disabled.bind="!($parent.CurrentItem == null || ($parent.CurrentItem != null && !$parent.CurrentItem.IsEditing)) && !$parent.HasEditingChilds" show.bind="!item.IsEditing" click.trigger="RemoveCommandAsync(item)">Remove</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <fs-paging></fs-paging>
+    </div>
+</div>

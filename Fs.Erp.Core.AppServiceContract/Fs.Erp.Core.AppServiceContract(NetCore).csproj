@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Fs.Erp.Core.AppServiceContract</RootNamespace>
+    <AssemblyName>Fs.Erp.Core.AppServiceContract</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="IEducationAndFeeManagerService.cs" />
+    <Compile Remove="IWebAuthenticationService.cs" />
+    <Compile Remove="IWebFormAuthenticationService.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fs.Core\Fs.Core(NetCore).csproj" />
+    <ProjectReference Include="..\Fs.Erp.Core\Fs.Erp.Core(NetCore).csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EnterpriseLibrary.Validation.NetCore" Version="6.1.4-rc" />
+    <PackageReference Include="Refit" Version="5.2.1" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ServiceModel">
+      <HintPath>..\References\System.ServiceModel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,104 @@
+﻿<template>
+    <require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+    <require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+    
+    <div slot="content">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+                User
+            </h3>
+        </div>
+        <div class="container">
+            <div>
+                <h3 class="kt-portlet__head-title">Information</h3>
+                <div class="row">
+                    <label class="col-1" for="Login">Login</label>
+                    <div class="col-3">
+                        <div style="height:70% !important" class.bind="NameErrors.length ? 'invalid' : ''">
+                            <input style="height:100% !important" class="form-control"
+                                   id="Login" value.bind="Login & validate:item.validationController" disabled.bind="!$this.IsEditing" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-1" for="Name">Name</label>
+                    <div class="col-3">
+                        <div style="height:70% !important" class.bind="NameErrors.length ? 'invalid' : ''">
+                            <input style="height:100% !important" class="form-control"
+                                   id="Name" value.bind="Name & validate:item.validationController" disabled.bind="!$this.IsEditing" />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-1" for="Email">Email</label>
+                    <div class="col-3">
+                        <div style="height:70% !important" class.bind="EmailErrors.length ? 'invalid' : ''">
+
+                            <input style="height:100% !important" class="form-control"
+                                   id="Email" value.bind="Email & validate:item.validationController" disabled.bind="!$this.IsEditing" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-1" for="ExternalUserId">ExternalUserId</label>
+                    <div class="col-3">
+                        <div style="height:70% !important" class.bind="ExternalUserIdErrors.length ? 'invalid' : ''">
+
+                            <input style="height:100% !important" class="form-control"
+                                   id="ExternalUserId" value.bind="ExternalUserId & validate:item.validationController" disabled.bind="!$this.IsEditing" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <label class="col-1" for="Name">Active</label>
+                    <div class="col-3">
+                        <span style="width: 40px">
+                            <label class=" kt-checkbox kt-checkbox--single kt-checkbox--solid">
+                                <input type="checkbox" class="align-middle" id="IsActive" checked.bind="IsActive" disabled.bind="!$this.IsEditing" /><span></span>
+                            </label>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="row">
+
+                    <label class="col-1" for="Name">Locked</label>
+                    <div class="col-3">
+                        <span style="width: 40px">
+                            <label class=" kt-checkbox kt-checkbox--single kt-checkbox--solid">
+                                <input type="checkbox" class="align-middle" id="IsLocked" checked.bind="IsLocked" disabled.bind="!$this.IsEditing" /><span></span>
+                            </label>
+                        </span>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-12" style="color:red ">
+                        หากต้องการเปลี่ยนรหัสผ่านใหม่ให้กับผู้ใช้ท่านนี้ ให้ทำการกรอก Password ใหม่ ในช่อง Password<br />
+                        Please input new password in case of password change for this user.
+                    </label>
+                </div>
+                <div class="row">
+                    <label class="col-1" for="Password">Password</label>
+                    <div class="col-3">
+                        <div style="height:70% !important" class.bind="PasswordErrors.length ? 'invalid' : ''">
+                            <input style="height:100% !important" class="form-control"
+                                   id="Password" type="password" value.bind="Password & validate:item.validationController" disabled.bind="!$this.IsEditing" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-11">
+                        <button class="btn btn-primary" disabled.bind="$this.IsEditing" show.bind="!$this.IsEditing" click.trigger="BeginEdit()">Edit</button>
+                        <button class="btn btn-success" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="SaveData()">Save</button>
+                        <button class="btn btn-danger" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="CancelAsync()">Cancel</button>
+                        <button class="btn btn-primary" click.trigger="Back()">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+</template>

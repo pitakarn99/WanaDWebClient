@@ -1,0 +1,11 @@
+{
+  "Test": {
+    "Code": "Code",
+    "Name": "Name",
+    "Price": "Price",
+    "Action": "Action",
+    "Search": "Search",
+    "Add": "Add",
+    "testInterpolation": "{{what}} is {{how}}"
+  }
+}

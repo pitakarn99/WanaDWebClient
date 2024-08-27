@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WanaD.WebClient", "WanaD.WebClient\WanaD.WebClient.csproj", "{4AFB5D3C-F912-44DF-B9B3-34EB7ECC9439}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fs.Core(NetCore).V4", "Fs.Core\Fs.Core(NetCore).V4.csproj", "{D6F26EF1-8AA6-4623-8FA9-5E7C1A998380}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fs.Erp.Core(NetCore).V4", "Fs.Erp.Core\Fs.Erp.Core(NetCore).V4.csproj", "{054A7FED-B19F-49D3-B0ED-D48EB49EFC07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fs.Erp.Core.AppServiceContract(NetCore).V4", "Fs.Erp.Core.AppServiceContract\Fs.Erp.Core.AppServiceContract(NetCore).V4.csproj", "{A510AC20-47C2-4D78-8D09-89BB1815260E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WanaD.AppServiceContract", "WanaD.AppServiceContract\WanaD.AppServiceContract.csproj", "{1BBE48B9-62BC-40B1-8377-DBC0426F087E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4AFB5D3C-F912-44DF-B9B3-34EB7ECC9439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AFB5D3C-F912-44DF-B9B3-34EB7ECC9439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AFB5D3C-F912-44DF-B9B3-34EB7ECC9439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AFB5D3C-F912-44DF-B9B3-34EB7ECC9439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6F26EF1-8AA6-4623-8FA9-5E7C1A998380}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F26EF1-8AA6-4623-8FA9-5E7C1A998380}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F26EF1-8AA6-4623-8FA9-5E7C1A998380}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F26EF1-8AA6-4623-8FA9-5E7C1A998380}.Release|Any CPU.Build.0 = Release|Any CPU
+		{054A7FED-B19F-49D3-B0ED-D48EB49EFC07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{054A7FED-B19F-49D3-B0ED-D48EB49EFC07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{054A7FED-B19F-49D3-B0ED-D48EB49EFC07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{054A7FED-B19F-49D3-B0ED-D48EB49EFC07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A510AC20-47C2-4D78-8D09-89BB1815260E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A510AC20-47C2-4D78-8D09-89BB1815260E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A510AC20-47C2-4D78-8D09-89BB1815260E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A510AC20-47C2-4D78-8D09-89BB1815260E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BBE48B9-62BC-40B1-8377-DBC0426F087E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BBE48B9-62BC-40B1-8377-DBC0426F087E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BBE48B9-62BC-40B1-8377-DBC0426F087E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BBE48B9-62BC-40B1-8377-DBC0426F087E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96C14C92-268A-4356-8980-B32E61C06D4E}
+	EndGlobalSection
+EndGlobal

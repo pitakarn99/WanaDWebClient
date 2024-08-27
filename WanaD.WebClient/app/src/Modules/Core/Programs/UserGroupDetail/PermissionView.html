@@ -1,0 +1,68 @@
+﻿<require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+
+<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+
+<require from="Lib/Fs.Core.Aurelia/Components/select2"></require>
+
+<div>
+    <style>
+        .pd-col {
+            padding-top: .75rem;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-2 pd-col">
+                Select the sub-System
+            </div>
+            <div class="col-3">
+
+                <select2 name="ModulesList" placeholder="Select Module"
+                         calculate-item-id="Id" calculate-item-text="Name"
+                         items.bind="ModuleList" selected-items.bind="SelectedModule" selected-values.bind="SelectedModuleId"></select2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12  pd-col">
+                <h5>List of Permission</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" repeat.for="item of Categories">
+                <label>
+                    <input type="checkbox" checked.bind="item.IsCheckCategory" disabled.bind="!$this.IsEditing">
+                </label>
+                <b><span>${item.Name}</span></b>
+                <div class="col-11 offset-1">
+                    <div class="row" repeat.for="item2 of item.Templates">
+                        <div class="col-4 pd-col">
+                            <label>
+                                <input type="checkbox" checked.bind="item2.IsCheck" disabled.bind="!$this.IsEditing">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>${item2.Name}</span>
+                            </label>
+                        </div>
+                        <div class="col-6" if.bind="item2.IsRequireResourceType && item2.IsCheck">
+
+                            <select2 placeholder="Select Module"
+                                     calculate-item-id="ResourceId"
+                                     calculate-item-text="Name"
+                                     disabled.bind="!$this.IsEditing"
+                                     items.bind="item2.ResourceList"
+                                     is-multiple.bind="true"
+                                     selected-values.bind="item2.ResourceId"></select2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <button class="btn btn-primary" disabled.bind="$this.IsEditing" show.bind="!$this.IsEditing" click.trigger="BeginEdit()">Edit</button>
+                <button class="btn btn-success" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="SaveAsync()">Save</button>
+                <button class="btn btn-danger" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="Cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

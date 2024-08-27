@@ -1,0 +1,28 @@
+﻿<template>
+  <br />
+  <!--    <require from="/Lib/Fs.Core.Aurelia/Components/select2"></require>
+  -->
+  <ux-dialog-body>
+
+    <!--<h2>File Type</h2>
+    <input type="file" change.delegate="OnSelectFile($event)" />-->
+
+
+    <div class="division col-sm-12">
+      <!--<h3>นำเข้าข้อมูลผู้ใช้งาน</h3>
+      <br />-->
+      <label>ไฟล์ <a class="require" style="color:red">*</a></label>
+      <input class="form-control" type="file" change.trigger="OnSelectFileAsync($event)"
+             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/zip"
+             style=" white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" />
+    </div>
+    <br />
+
+    <div class="division col-sm-12">
+      <a>ตัวอย่างไฟล์นำเข้า </a>
+      <a class="link-info" click.trigger="ExportExample()">คลิกที่นี่</a>
+    </div>
+    <br />
+
+  </ux-dialog-body>
+</template>

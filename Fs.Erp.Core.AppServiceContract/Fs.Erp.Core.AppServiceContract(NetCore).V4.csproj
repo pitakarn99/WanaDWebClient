@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Fs.Erp.Core.AppServiceContract</RootNamespace>
+    <AssemblyName>Fs.Erp.Core.AppServiceContract</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="IEducationAndFeeManagerService.cs" />
+    <Compile Remove="IWebAuthenticationService.cs" />
+    <Compile Remove="IWebFormAuthenticationService.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fs.Core\Fs.Core(NetCore).V4.csproj" />
+    <ProjectReference Include="..\Fs.Erp.Core\Fs.Erp.Core(NetCore).V4.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

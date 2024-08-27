@@ -1,0 +1,64 @@
+﻿<template>
+    <div slot="content">
+
+
+        <div class="row" id="row1" style="justify-content: center;">
+            <div class="col-5">Plot Name <span class="require">*</span> :</div>
+            <div class="col-5">
+                <input type="text" class.bind="NameErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="viewModel.Name & validate" validation-errors.from-view="NameErrors" disabled.bind="!IsEditing">
+                <span repeat.for="error of NameErrors" class="require">${error.result.message}</span>
+            </div>
+
+        </div>
+
+        <div class="row mt-3" id="row2" style="justify-content: center;">
+            <div class="col-5">Area (Rai) <span class="require">*</span> : </div>
+            <div class="col-5">
+                <input type="number" class.bind="AreaErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="viewModel.Area & validate" validation-errors.from-view="AreaErrors" disabled.bind="!IsEditing">
+                <span repeat.for="error of AreaErrors" class="require">${error.result.message}</span>
+            </div>
+        </div>
+
+        <div class="row mt-3" id="row3" style="justify-content: center;">
+            <div class="col-5">Land Owner <span class="require">*</span> : </div>
+            <div class="col-5">
+                <input type="text" class.bind="LandOwnerErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="viewModel.LandOwner & validate" validation-errors.from-view="LandOwnerErrors" disabled.bind="!IsEditing">
+                <span repeat.for="error of LandOwnerErrors" class="require">${error.result.message}</span>
+            </div>
+        </div>
+
+        <div class="row mt-3" style="justify-content: center;">
+            <div class="col-6" style="color: #628369;">Contract Payment Information</div>
+            <div class="col-4"></div>
+        </div>
+
+        <div class="row mt-3" id="row4" style="justify-content: center;">
+            <div class="col-5">Bank <span class="require">*</span> : </div>
+            <div class="col-5">
+                <select class.bind="BankIdErrors.length==0 ? 'form-control':'form-control is-invalid'" value.bind="viewModel.BankId & validate" validation-errors.from-view="BankIdErrors" disabled.bind="!IsEditing">
+                    <option value.bind="">-- กรุณาเลือก --</option>
+                    <option repeat.for="item of viewModel.Parent.BankDatas" model.bind="item.Id" selected>
+                        ${item.DisplayName}
+                    </option>
+                </select>
+                <span repeat.for="error of BankIdErrors" class="require">${error.result.message}</span>
+            </div>
+        </div>
+        <div class="row mt-3" id="row5" style="justify-content: center;">
+            <div class="col-5">Bank Account No <span class="require">*</span> : </div>
+            <div class="col-5">
+                <input type="text" class.bind="BankAccNumberErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="viewModel.BankAccNumber & validate" validation-errors.from-view="BankAccNumberErrors" disabled.bind="!IsEditing">
+                <span repeat.for="error of BankAccNumberErrors" class="require">${error.result.message}</span>
+            </div>
+        </div>
+        <div class="row mt-3" id="row6" style="justify-content: center;">
+            <div class="col-5">Bank Account Name <span class="require">*</span> : </div>
+            <div class="col-5">
+                <input type="text" class.bind="BankAccHolderErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="viewModel.BankAccHolder & validate" validation-errors.from-view="BankAccHolderErrors" disabled.bind="!IsEditing">
+                <span repeat.for="error of BankAccHolderErrors" class="require">${error.result.message}</span>
+            </div>
+        </div>
+
+
+    </div>
+</template>

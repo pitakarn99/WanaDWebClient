@@ -1,0 +1,48 @@
+﻿<template  >
+<!--    <require from="/Lib/Fs.Core.Aurelia/Components/select2"></require>
+-->    <ux-dialog-body style="
+        width: 100%;
+        height: 100%;">
+    <br>
+    <h2>File Type</h2>
+    <br><label style="margin-right:10px">
+        <input type="radio" model.bind="false" checked.bind="FileType"> &nbsp;
+        Structure
+    </label><br>
+    <label style="margin-right:10px">
+        <input type="radio" model.bind="true" checked.bind="FileType"> &nbsp;
+        Language
+    </label><br>
+
+    <div if.bind="fileType">
+        <div class="datatable-cell datatable-cell-sort" style="width:100%">
+            <select class="form-control" value.bind="LangCode" change.trigger="SelectLanguage(LangCode)">
+                <option repeat.for="item of LangList"
+                        model.bind="item.Code">
+                    ${item.CodeNameDisplay}
+                </option>
+            </select>
+        </div>
+    </div>
+    <br />
+    <!--    <div class="col-9" class.bind="viewModel.validationController.length ? 'invalid' : ''">
+            <a title="Name" show.bind="viewModel.validationController.length == true">
+                <input value.bind="viewModel.Name & validate:viewModel.validationController" style="width: 100%; border: red solid 1px;" class="form-control" />
+                <span class.bind="viewModel.validationController.length" textcontent.bind="viewModel.NameErrors" style="color:red"></span>
+            </a>
+            <input show.bind="viewModel.NameErrors.length == false"
+                   value.bind="viewModel.Name & validate:viewModel.validationController" class="form-control" />
+        </div>-->
+
+    <div class.bind="viewModel.NameErrors.length ? 'invalid' : ''">
+        <a title="Name" show.bind="viewModel.NameErrors.length == true">
+            <span class.bind="viewModel.NameErrors.length" textcontent.bind="viewModel.NameErrors" style="color:red"></span>
+        </a>
+        <br show.bind="viewModel.NameErrors.length == false" />
+    </div>
+        <input type="file" change.trigger="OnSelectFileAsync($event)" 
+               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/zip" />
+   
+</ux-dialog-body>
+
+</template>

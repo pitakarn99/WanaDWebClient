@@ -1,0 +1,208 @@
+﻿<require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-datetime-picker"></require>
+
+<div class="card card-all">
+    <div class="kt-portlet__head-label">
+        <h3 class="kt-portlet__head-title"><span t="WanaD.OrderDetail:OrderDetailPage.OrderInformation"></span></h3>
+    </div>
+
+    <br />
+
+    <div id="order-no" class="row" style="align-items: center;">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.OrderNo"></span></div>
+        <div class="col-4"><input type="text" class="form-control" value.bind="OrderNo" disabled /></div>
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.Status"></span></div>
+        <div class="col-4"><input type="text" class="form-control fw-bold" value.bind="StatusCode" disabled style.bind="StatusCode == 'Reject' ? 'color:red;' : 'color:green;'" /></div>
+    </div>
+
+    <br />
+
+    <div id="factory" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.Factory"></span> <span class="require">*</span> :</div>
+        <div class="col-4" validation-errors.from-view="SelectedFactoryErrors" class.bind="SelectedFactoryErrors.length==0? '':'select2-is-invalid'">
+            <select2 search-auto-complete-function.bind="(e) => FindFactoryAutoComplete(e.params, e.success, e.failure)"
+                     calculate-item-id="Id"
+                     calculate-item-text="NameTH"
+                     name="SelectedFactory"
+                     is-multiple.bind="false"
+                     t="[placeholder]WanaD.OrderDetail:OrderDetailPage.SearchFactory"
+                     selected-items.bind="SelectedFactory & validate"
+                     disabled.bind="!IsCreate">
+            </select2>
+            <span repeat.for="error of SelectedFactoryErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <br />
+
+    <div id="product-type" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.ProductType"></span> <span class="require">*</span> :</div>
+        <div class="col-4">
+            <select class.bind="ProductTypeIdErrors.length==0 ? 'form-control':'form-control is-invalid'" value.bind="ProductTypeId & validate" validation-errors.from-view="ProductTypeIdErrors" disabled.bind="!IsCreate">
+                <option value.bind="">-- กรุณาเลือก --</option>
+                <option repeat.for="item of ProductTypeDatas" model.bind="item.Id" selected>
+                    ${item.DisplayName}
+                </option>
+            </select>
+            <span repeat.for="error of ProductTypeIdErrors" class="require">${error.result.message}</span>
+        </div>
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.Product"></span> <span class="require">*</span> : </div>
+        <div class="col-4" validation-errors.from-view="SelectedProductErrors" class.bind="SelectedProductErrors.length==0? '':'select2-is-invalid'">
+            <select2 search-auto-complete-function.bind="(e) => FindProductMasterAutoComplete(e.params, e.success, e.failure)"
+                     calculate-item-id="Id"
+                     calculate-item-text="ProductMasterName"
+                     name="SelectedProduct"
+                     is-multiple.bind="false"
+                     t="[placeholder]WanaD.OrderDetail:OrderDetailPage.SearchProduct"
+                     selected-items.bind="SelectedProduct & validate"
+                     disabled.bind="(!IsCreate) || (ProductTypeId==null || ProductTypeId=='')">
+            </select2>
+            <span repeat.for="error of SelectedProductErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <br />
+
+    <div id="teatype-ingredient" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.TypeOfTea"></span> :</div>
+        <div class="col-4">
+            <input type="text" class="form-control" value.bind="SelectedProduct.TeaType" disabled />
+        </div>
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.Ingredients"></span> : </div>
+        <div class="col-4 editable" contenteditable="false">
+            <textarea class="form-control" rows="3" value.bind="SelectedProduct.Ingredient" disabled></textarea>
+        </div>
+    </div>
+
+    <br />
+
+    <div id="processing" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.Processing"></span> :</div>
+        <div class="col-4 editable" contenteditable="false">
+            <ul>
+                <li repeat.for="item of SelectedProduct.ProcessingDatas">${item.Processing}</li>
+            </ul>
+        </div>
+    </div>
+
+    <br />
+
+    <div id="packaging-size-type" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.PackagingType"></span> : </div>
+        <div class="col-4">
+            <input type="text" class="form-control" value.bind="SelectedProduct.PackagingType" disabled />
+        </div>
+
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.PackagingSize"></span> : </div>
+        <div class="col-4">
+            <input type="text" class="form-control" value.bind="SelectedProduct.PackagingSize" disabled />
+        </div>
+    </div>
+
+    <br />
+
+    <div id="quantity" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.Quantity"></span> <span class="require">*</span> :</div>
+        <div class="col-4">
+            <input type="number" min="0.00" id="quantity" class.bind="QuantityErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="Quantity & validate" disabled.bind="!IsEditing && !IsQuantity" validation-errors.from-view="QuantityErrors" />
+            <span repeat.for="error of QuantityErrors" class="require">${error.result.message}</span>
+        </div>
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.Unit"></span> : </div>
+        <div class="col-4">            
+            <input type="text" class="form-control" value.bind="SelectedProduct.Unit" disabled />
+        </div>
+    </div>
+
+    <br />
+
+    <div id="unit-total-price" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.UnitPrice"></span> <span class="require">*</span> :</div>
+        <div class="col-4">
+            <input type="number" min="0.00" id="unit_price" class.bind="UnitPriceErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="UnitPrice & validate" disabled.bind="!IsEditing && !IsUnitPrice" validation-errors.from-view="UnitPriceErrors" />
+            <span repeat.for="error of UnitPriceErrors" class="require">${error.result.message}</span>
+        </div>
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.TotalPrice"></span> : </div>
+        <div class="col-4">
+            <input type="number" min="0.00" id="total_price" class="form-control" value.bind="Quantity*UnitPrice" disabled />
+        </div>
+    </div>
+
+    <br />
+
+    <div id="due-date" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.DueDate"></span> <span class="require">*</span> :</div>
+        <div class="col-4" validation-errors.from-view="DueDateErrors">
+            <fs-datetime-picker class.bind="DueDateErrors.length==0? '':'datetimepicker-is-invalid'"
+                                style="text-align: center"
+                                display-name="Date"
+                                sorting-name="Date"
+                                onkeydown="return false"
+                                icon-base="font-awesome"
+                                with-date-icon="true"
+                                
+                                t="[placeholder]WanaD.OrderDetail:OrderDetailPage.InputDueDate"
+                                model.bind="DueDate & validate"
+                                show.bind="IsCreate || IsDueDate"
+                                button-class="btn btn-primary btn-sm"
+                                options.bind="{ format: 'D/MM/YYYY',useCurrent: false }">
+            </fs-datetime-picker>
+            <div show.bind="!IsEditing && !IsDueDate"><input type="text" class="form-control" value.bind="DueDate | dateFormat:'D/MM/YYYY'" disabled /></div>
+            <span repeat.for="error of DueDateErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <br />
+
+    <div id="remark" class="row">
+        <div class="col-2"><span t="WanaD.OrderDetail:OrderDetailPage.Remark"></span> :</div>
+        <div class="col">
+            <textarea class="form-control" rows="3" value.bind="Remark" disabled.bind="!IsEditing && !IsRemark"></textarea>
+
+        </div>
+    </div>
+
+    <br />
+
+    <div id="button-section" class="d-flex justify-content-between">
+        <div id="div-back-page">
+            <button class="btn btn-primary" click.trigger="BackPage()"><span t="WanaD.OrderDetail:OrderDetailPage.Back"></span></button>
+        </div>
+        <div id="div-add-data" style="text-align:right">
+            <button class="btn btn-outline-secondary me-2" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="CancelAsync()"><span t="WanaD.OrderDetail:OrderDetailPage.Cancel"></span></button>
+            <button class="btn btn-primary " disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="SaveData()"><span t="WanaD.OrderDetail:OrderDetailPage.Submit"></span></button>
+
+
+            <!-- Order New Status -->
+            <button class="btn btn-warning" show.bind="StatusCode == 'New'" click.trigger="WithDrawOrder()"><span t="WanaD.OrderDetail:OrderDetailPage.WithDraw"></span></button>
+
+            <!-- Order Withdraw Status -->
+            <button class="btn btn-warning" show.bind="(StatusCode == 'Withdraw') && (ButtonStatus != 'WithDrawEditing')" click.trigger="WithDrawEditField()"><span t="WanaD.OrderDetail:OrderDetailPage.Edit"></span></button>
+            <button class="btn btn-secondary" show.bind="ButtonStatus == 'WithDrawEditing'" click.trigger="CancelEditField()">Cancel</button>
+            <button class="btn btn-primary" show.bind="ButtonStatus == 'WithDrawEditing'" click.trigger="ButtonStatus = 'Resubmit' && ReSubmitOrder()"><span t="WanaD.OrderDetail:OrderDetailPage.Re-submit"></span></button>
+
+            <!-- Close Order -->
+            <button class="btn btn-danger" show.bind="StatusCode == 'Accepted' || StatusCode == 'Rejected' || ButtonStatus == 'WithDrawEditing'" click.trigger="CloseOrder()"><span t="WanaD.OrderDetail:OrderDetailPage.CloseOrder"></span></button>
+
+            <!-- Order Reject Status  -->
+            <button class="btn btn-warning" show.bind="(StatusCode == 'Rejected') && (ButtonStatus != 'RejectEditing')" click.trigger="RejectStartEditField()"><span t="WanaD.OrderDetail:OrderDetailPage.Edit"></span></button>
+            <button class="btn btn-secondary" show.bind="ButtonStatus == 'RejectEditing'" click.trigger="CancelEditField()">Cancel</button>
+            <button class="btn btn-primary" show.bind="ButtonStatus == 'RejectEditing'" click.trigger="ButtonStatus = 'Resubmit' && ReSubmitOrder()"><span t="WanaD.OrderDetail:OrderDetailPage.Re-submit"></span></button>
+        </div>
+    </div>
+
+    <br />
+
+    <div id="history" class="row">
+        <label class="col-4">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.9377 9.37518V14.4693L20.1705 17.0088C20.3837 17.1368 20.5373 17.3443 20.5976 17.5856C20.6578 17.8269 20.6197 18.0823 20.4916 18.2955C20.3636 18.5087 20.1561 18.6623 19.9148 18.7225C19.6735 18.7827 19.4181 18.7446 19.2049 18.6166L14.5174 15.8041C14.3787 15.7207 14.2639 15.6029 14.1842 15.462C14.1045 15.3211 14.0627 15.162 14.0627 15.0002V9.37518C14.0627 9.12654 14.1615 8.88808 14.3373 8.71226C14.5131 8.53645 14.7516 8.43768 15.0002 8.43768C15.2489 8.43768 15.4873 8.53645 15.6631 8.71226C15.8389 8.88808 15.9377 9.12654 15.9377 9.37518ZM26.2502 6.56268C26.0016 6.56268 25.7631 6.66145 25.5873 6.83727C25.4115 7.01308 25.3127 7.25154 25.3127 7.50018V9.60955C24.5686 8.74705 23.8092 7.91619 22.9549 7.05135C21.3914 5.48772 19.4019 4.4195 17.2348 3.98016C15.0677 3.54082 12.8192 3.74985 10.7702 4.58111C8.72122 5.41238 6.96264 6.82903 5.7142 8.65406C4.46576 10.4791 3.78281 12.6315 3.7507 14.8425C3.71859 17.0534 4.33873 19.2248 5.53364 21.0853C6.72856 22.9458 8.44525 24.413 10.4692 25.3034C12.4932 26.1938 14.7347 26.468 16.9136 26.0918C19.0926 25.7156 21.1123 24.7056 22.7205 23.1881C22.8101 23.1034 22.8821 23.002 22.9325 22.8895C22.9828 22.777 23.0105 22.6557 23.014 22.5326C23.0175 22.4094 22.9967 22.2867 22.9528 22.1716C22.9088 22.0564 22.8427 21.9511 22.758 21.8615C22.6734 21.7719 22.5719 21.6999 22.4595 21.6496C22.347 21.5992 22.2257 21.5715 22.1025 21.568C21.9793 21.5645 21.8567 21.5853 21.7415 21.6293C21.6264 21.6732 21.521 21.7394 21.4315 21.824C20.0909 23.0874 18.4078 23.9278 16.5925 24.2404C14.7771 24.5529 12.9099 24.3238 11.224 23.5815C9.53807 22.8392 8.1082 21.6167 7.11292 20.0667C6.11764 18.5166 5.60106 16.7077 5.62769 14.8658C5.65432 13.0239 6.22297 11.2307 7.26264 9.71007C8.30231 8.18943 9.76692 7.00878 11.4736 6.31554C13.1802 5.62231 15.0533 5.44721 16.8589 5.81212C18.6644 6.17703 20.3225 7.06577 21.626 8.36736C22.5799 9.33299 23.4154 10.2635 24.258 11.2502H21.5627C21.3141 11.2502 21.0756 11.3489 20.8998 11.5248C20.724 11.7006 20.6252 11.939 20.6252 12.1877C20.6252 12.4363 20.724 12.6748 20.8998 12.8506C21.0756 13.0264 21.3141 13.1252 21.5627 13.1252H26.2502C26.4989 13.1252 26.7373 13.0264 26.9131 12.8506C27.0889 12.6748 27.1877 12.4363 27.1877 12.1877V7.50018C27.1877 7.25154 27.0889 7.01308 26.9131 6.83727C26.7373 6.66145 26.4989 6.56268 26.2502 6.56268Z" fill="#505159" />
+            </svg>
+            <span style="cursor:pointer;" click.trigger="ViewOrderHistory(WorkflowDocumentId)"><span t="WanaD.OrderDetail:OrderDetailPage.OrderHistory"></span></span>
+        </label>
+    </div>
+
+
+</div>

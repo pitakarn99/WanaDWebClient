@@ -1,0 +1,20 @@
+﻿<template>
+    <ux-dialog>
+        <ux-dialog-header>
+            <h2>${Header}</h2>
+        </ux-dialog-header>
+        <ux-dialog-body class="container-fluid">
+            <compose view.bind="view" view-model.bind="viewModel"></compose>
+        </ux-dialog-body>
+        <ux-dialog-footer>
+            <!--<input type="button" value="Okay"  click.trigger="Okay()" />
+            <input type="button" value="Close" click.trigger="Close()" />-->
+            <button type="button" class.bind="okbtnclass" click.trigger="OkayAsync()">
+                ${okbtn}
+            </button>
+            <button type="button" class.bind="cancelbtnclass" click.trigger="Close()" show.bind="IsShowCancel">
+                ${cancelbtn}
+            </button>
+        </ux-dialog-footer>
+    </ux-dialog>
+</template>

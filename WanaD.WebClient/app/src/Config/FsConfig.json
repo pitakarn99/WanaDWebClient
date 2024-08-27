@@ -1,0 +1,12 @@
+{
+  "Config": {
+    "ServiceBaseUrl": "https://localhost:9702/Server/",
+    "ClientBaseUrl": "https://localhost:9702/Client/",
+    "UserDetailUrl": "https://localhost:9702/Modules/Core/UserDetailPage/",
+    "UserGroupDetailUrl": "https://localhost:9702/Modules/Core/UserGroupDetailPage/",
+    "YearOffset": 0,
+    "IsShowPasswordRequirements": true,
+    "EnableManualCheckSession": false
+
+  }
+}

@@ -1,0 +1,94 @@
+﻿<require from="Lib/Fs.Core.Aurelia/Components/select2"></require>
+
+<div class="clear-both" style="padding: 2px" if.bind="!IsDialog">
+    <div class="row">
+        <div class="col-md-12 d-flex">
+            <span style="padding-right: 5px">
+                <select value.bind="DataContext.PageSize"
+                        style="border: solid 0px; border-bottom: solid 1px">
+                    <option repeat.for="item of Paging" model.bind="item.id">
+                        ${item.text}
+                    </option>
+                </select>
+            </span>
+            <span style="display: inline-block"
+                  textcontent.bind="DataContext.ItemCount > 0 ? 'Showing '+ ((DataContext.PageIndex * DataContext.PageSize) + 1) + ' - ' + (((DataContext.PageIndex * DataContext.PageSize) + 1) + (DataContext.SearchResultCollectionView.length - 1)) + ' of ' + DataContext.ItemCount  : '0 - 0 of 0'"></span>
+
+            <div style="margin-left: auto"></div>
+
+            <div style="width: 45px;   height: 25px;   display: inline-block;   text-align: center; "
+                 disabled.bind="DataContext.PageIndex <= 0"
+                 click.trigger="DataContext.PageChangedAsync(0)">
+                <i class="fa fa-angle-double-left"></i>
+            </div>
+            <div style="width: 45px;   height: 25px;   display: inline-block;   text-align: center; "
+                 disabled.bind="DataContext.PageIndex <= 0"
+                 click.trigger="DataContext.PageChangedAsync(DataContext.PageIndex - 1)">
+                <i class="fa fa-angle-left"></i>
+            </div>
+
+            <div style="
+          width: 45px;
+          height: 25px;
+          display: inline-block;
+          text-align: center;
+        ">
+                ${DataContext.PageIndex + 1}
+            </div>
+            <div style="width: 45px;   height: 25px;   display: inline-block;   text-align: center; " disabled.bind="DataContext.PageIndex >= DataContext.PageCount - 1"
+                 click.trigger="DataContext.PageChangedAsync(DataContext.PageIndex + 1)">
+                <i class="fa fa-angle-right"></i>
+            </div>
+
+            <div style="width: 45px;   height: 25px;   display: inline-block;   text-align: center; " disabled.bind="DataContext.PageIndex >= DataContext.PageCount - 1"
+                 click.trigger="DataContext.PageChangedAsync(DataContext.PageCount - 1)">
+                <i class="fa fa-angle-double-right"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div align="center" if.bind="IsDialog">
+
+    <div class="row">
+        <div class="col-md-12 d-flex">
+            <span style="padding-right: 5px">
+                <select value.bind="DataContext.PageSize"
+                        style="border: solid 0px; border-bottom: solid 1px">
+                    <option repeat.for="item of Paging" model.bind="item.id">
+                        ${item.text}
+                    </option>
+                </select>
+            </span>
+            <span style="display: inline-block"
+                  textcontent.bind="DataContext.ItemCount > 0 ? 'Showing '+ ((DataContext.PageIndex * DataContext.PageSize) + 1) + ' - ' + (((DataContext.PageIndex * DataContext.PageSize) + 1) + (DataContext.SearchResultCollectionView.length - 1)) + ' of ' + DataContext.ItemCount  : '0 - 0 of 0'"></span>
+            <div style="margin-left: auto"></div>
+            <div disabled.bind="DataContext.PageIndex <= 0"
+                 click.trigger="DataContext.PageChangedAsync(0)">
+                <i class="fa fa-angle-double-left"></i>
+            </div>
+            <div disabled.bind="DataContext.PageIndex <= 0"
+                 click.trigger="DataContext.PageChangedAsync(DataContext.PageIndex - 1)">
+                <i class="fa fa-angle-left"></i>
+            </div>
+
+            <div style="
+          width: 45px;
+          height: 25px;
+          display: inline-block;
+          text-align: center;
+        ">
+                ${DataContext.PageIndex + 1}
+            </div>
+            <div disabled.bind="DataContext.PageIndex >= DataContext.PageCount - 1"
+                 click.trigger="DataContext.PageChangedAsync(DataContext.PageIndex + 1)">
+                <i class="fa fa-angle-right"></i>
+            </div>
+
+            <div disabled.bind="DataContext.PageIndex >= DataContext.PageCount - 1"
+                 click.trigger="DataContext.PageChangedAsync(DataContext.PageCount - 1)">
+                <i class="fa fa-angle-double-right"></i>
+            </div>
+        </div>
+    </div>
+</div>

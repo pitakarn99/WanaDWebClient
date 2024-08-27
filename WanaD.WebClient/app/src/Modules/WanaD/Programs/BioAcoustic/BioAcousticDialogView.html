@@ -1,0 +1,59 @@
+﻿<div class="row">
+    <div class="col-3 mt-2 mt-2">Farm<span class="require">*</span></div>
+    <div class="col-9 mt-2" validation-errors.from-view="viewModel.FarmErrors" class.bind="viewModel.FarmErrors.length==0? '':'select2-is-invalid'">
+        <select2 search-auto-complete-function.bind="e=>FindFarmAsync(e)"
+                 calculate-item-id="Id"
+                 calculate-item-text="Name"
+                 name="SingleAuto2"
+                 is-multiple.bind="false"
+                 placeholder="Select"
+                 selected-items.bind="viewModel.Farm & validate" disabled.bind="true"></select2>
+    </div>
+
+    <div class="col-3 mt-2 mt-2">Plot<span class="require">*</span></div>
+    <div class="col-9 mt-2" validation-errors.from-view="viewModel.PlotItemErrors" class.bind="viewModel.PlotItemErrors.length==0? '':'select2-is-invalid'">
+        <select2 name="Single"
+                 placeholder="Select"
+                 calculate-item-id="Id"
+                 calculate-item-text="Name"
+                 items.bind="viewModel.Farm.Plots"
+                 selected-items.bind="viewModel.Plot & validate" disabled.bind="true"></select2>
+    </div>
+    <div class="col-3 mt-2">Score</div>
+    <div class="col-9 mt-2"> <input class="form-control" value.bind="viewModel.Score" disabled.bind="true" /></div>
+
+    <div class="col-3 mt-2">Date <span class="require">*</span></div>
+    <div class="col-9 mt-2">
+
+        <span show.bind="!IsEditing" class="form-control thisdisabled">${viewModel.Date | dateFormat:'D/M/YYYY'}</span>
+    </div>
+    <div class="col-3 mt-2">Sensor ID</div>
+    <div class="col-9 mt-2"> <input class="form-control" value.bind="viewModel.SenserId" disabled.bind="true" /></div>
+    <div class="col-3 mt-2">Sensor Coordinates</div>
+    <div class="col-9 mt-2"> <input class="form-control" value.bind="viewModel.SenserCoordinates" disabled.bind="true" /></div>
+
+
+
+    <div class="col-12 mt-2"><label>Remark</label><textarea class="form-control" value.bind="viewModel.Remark" disabled.bind="!IsEditing"></textarea></div>
+
+    <div class="col-12 row" repeat.for="item of viewModel.FileInfoList">
+        <div class="col-3 mt-2" if.bind="$index == 0">Upload Test Document <span class="require">*</span></div>
+        <div class="col-9 mt-2 dropzone-item" repeat.for="item of viewModel.FileInfoList" click.trigger="viewModel.dowloadfile(item)">
+            <!--begin::File-->
+            <div class="dropzone-file">
+                <div class="dropzone-filename" title="${item.FileName}">
+                    <span>${item.FileName}</span>
+                </div>
+            </div>
+            <!--end::File-->
+            <!--begin::Toolbar-->
+            <div class="dropzone-toolbar">
+                <span if.bind="viewModel.IsEditing" class="dropzone-delete" click.trigger="viewModel.removeFile($index)"><i class="bi bi-x fs-1"></i></span>
+            </div>
+            <!--end::Toolbar-->
+        </div>
+    </div>
+
+
+
+</div>

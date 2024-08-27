@@ -1,0 +1,58 @@
+﻿<!-- Bootstrap version 3 -->
+<div
+  if.bind="bootstrapVersion == 3"
+  class.bind="parseBool(withIcon) ? 'input-group date' : 'date'"
+>
+  <input
+    show.bind="parseBool(withInput)"
+    type="text"
+    class="form-control datetimepicker"
+    value.two-way="value & updateTrigger:'blur'"
+    model.bind="model"
+    blur.trigger="blur()"
+    placeholder.bind="placeholder"
+    readonly.bind="readonly"
+    element.bind="element"
+  />
+  <span
+    if.bind="parseBool(withIcon)"
+    class="input-group-addon datetimepicker"
+    data-target="#datetimepicker"
+    data-toggle="datetimepicker"
+  >
+    <span class.bind="icon"></span>
+  </span>
+</div>
+
+<!-- Bootstrap version 4 -->
+<div
+  if.bind="bootstrapVersion == 4"
+  class.bind="parseBool(withIcon) ? 'input-group' : 'date'"
+>
+  <input
+    show.bind="parseBool(withInput)"
+    type="text"
+    class="form-control date datetimepicker"
+    value.two-way="value & updateTrigger:'blur'"
+    model.bind="model"
+    blur.trigger="blur()"
+    placeholder.bind="placeholder"
+    disabled.bind="readonly"
+    element.bind="element"
+  />
+  <span
+    if.bind="parseBool(withIcon)"
+    class="input-group-append"
+    data-target="#datetimepicker"
+    data-toggle="datetimepicker"
+  >
+    <button
+      class.bind="buttonClass"
+      disabled.bind="readonly"
+      type="button"
+      click.trigger="showCalendar()"
+    >
+      <span class.bind="icon"></span>
+    </button>
+  </span>
+</div>

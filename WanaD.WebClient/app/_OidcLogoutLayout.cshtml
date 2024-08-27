@@ -1,0 +1,14 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <base href="@Configuration["BasePath"]" />
+    <title></title>
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

@@ -1,0 +1,674 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+<PropertyGroup>
+  <!-- Makes the TypeScript compilation task a no-op -->
+  <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+</PropertyGroup>
+
+
+<PropertyGroup>
+  <GenerateRuntimeConfigDevFile>true</GenerateRuntimeConfigDevFile>
+</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.6" />
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="8.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="app\**\*">
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+   
+    <None Include="wwwroot\**\*">
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+
+    <None Include="wwwroot\assets\**\*">
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Remove="app\src\Modules\WanaD\NewFolder\**" />
+    <Content Remove="app\src\Modules\WanaD\NewFolder\**" />
+    <EmbeddedResource Remove="app\src\Modules\WanaD\NewFolder\**" />
+    <None Remove="app\src\Modules\WanaD\NewFolder\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fs.Core\Fs.Core(NetCore).V4.csproj" />
+    <ProjectReference Include="..\Fs.Erp.Core.AppServiceContract\Fs.Erp.Core.AppServiceContract(NetCore).V4.csproj" />
+    <ProjectReference Include="..\Fs.Erp.Core\Fs.Erp.Core(NetCore).V4.csproj" />
+    <ProjectReference Include="..\WanaD.AppServiceContract\WanaD.AppServiceContract.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="Views\Home\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Home\Privacy.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Oidc\LoginCallbackPage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Oidc\LogoutCallbackPage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Oidc\SilentLoginPage.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Shared\Error.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Shared\_OidcLayout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Shared\_OidcLogoutLayout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Shared\_OidcSilentLoginLayout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Shared\_ValidationScriptsPartial.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\_ViewImports.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\_ViewStart.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Update="app\src\Modules\Core\Scripts\ACLCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ACLData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ACLTemplateCategoryData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLTemplateCategoryData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ACLTemplateData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLTemplateData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ACLTemplateDetailData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLTemplateDetailData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ACLTemplateItemsData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLTemplateItemsData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ACLTemplateSearchCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLTemplateSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ACLTemplateUpdateParameter.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLTemplateUpdateParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ACLUpdateParameter.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ACLUpdateParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ApplicationProfileData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ApplicationProfileData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\AccountClosedData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\AccountClosedData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ACLCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ACLCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ACLData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ACLData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ACLTemplateAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IACLTemplateAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ACLTemplateSearchParameter.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ACLTemplateSearchParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ACLUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ACLUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ActivateData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ActivateData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ActivateTokenRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ActivateTokenRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ActivateUserAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IActivateUserAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ApplicationCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ApplicationCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ApplicationData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ApplicationData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ApplicationScopeUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ApplicationScopeUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ApplicationUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ApplicationUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\AuditLogCategoryData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\AuditLogCategoryData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\AuditLogData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\AuditLogData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\AuditLogMessageData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\AuditLogMessageData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\AuditLogSearchAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IAuditLogSearchAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\AuditLogSearchData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\AuditLogSearchData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\AuditLogUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\AuditLogUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ChangePasswordAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IChangePasswordAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ChangePasswordUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ChangePasswordUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ClosingData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ClosingData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IConfigurationAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationCategoryItemData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationCategoryItemData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationItemCategoryData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationItemCategoryData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationItemCategorySearchCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationItemCategorySearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationItemCategorySearchParameter.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationItemCategorySearchParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationItemData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationItemData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationSearchCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationSearchParameter.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationSearchParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ConfigurationUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ConfigurationUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\CoreOperationResources.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\CoreOperationResources.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\CreatePasswordData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\CreatePasswordData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\EducationAndFeeManagerServiceCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\EducationAndFeeManagerServiceCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\EducationFeeData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\EducationFeeData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\EducationFeeUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\EducationFeeUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\EducationInstitueData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\EducationInstitueData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\EducationLevelData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\EducationLevelData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\EducationLevelUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\EducationLevelUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\FileData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\FileData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\FileInfoData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\FileInfoData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\FileRelationData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\FileRelationData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\FileXMLData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\FileXMLData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\GroupCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\GroupCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\GroupData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\GroupData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\GroupUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\GroupUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ImportRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ImportRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\LanguageAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ILanguageAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\LanguageData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\LanguageData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\LoginTypeData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\LoginTypeData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ManageUserAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IManageUserAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ManageUserGroupAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IManageUserGroupAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ManageUserGroupMemberSearchParameter.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ManageUserGroupMemberSearchParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MemberCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MemberCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MemberData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MemberData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MemberUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MemberUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MenuAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IMenuAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MenuData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MenuData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MenuData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MenuData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MenuOperation.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MenuOperation.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MenuParameter.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MenuParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MenuParameter2.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MenuParameter2.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\MenuResources.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\MenuResources.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ModuleData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ModuleData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\OperationData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\OperationData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\OperationResources.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\OperationResources.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\OperationUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\OperationUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\OrganizationUnitData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\OrganizationUnitData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\OuConfigurationData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\OuConfigurationData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\PasswordRequirementsDisplayData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\PasswordRequirementsDisplayData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\PDFFileInfoData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\PDFFileInfoData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\PDFPageInfoData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\PDFPageInfoData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ResetPasswordResult.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ResetPasswordResult.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ResetPasswordTokenRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ResetPasswordTokenRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ResetPasswordUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ResetPasswordUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ResourceCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ResourceCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ResourceData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ResourceData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ResourceRelationData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ResourceRelationData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\RoleCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\RoleCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\RoleData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\RoleData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\RoleUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\RoleUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ScopeCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ScopeCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ScopeData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ScopeData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\ScopeUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\ScopeUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\Scope_Role_GroupData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\Scope_Role_GroupData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\SendActivateEmailData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\SendActivateEmailData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\TreeNode.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\TreeNode.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\TreeNodeState.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\TreeNodeState.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\UploadFileAppService.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\IUploadFileAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\UploadFileInfo.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\UploadFileInfo.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\UploadFileResult.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\UploadFileResult.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\UserCheckExternalRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\UserCheckExternalRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\UserData01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\UserData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\UserSendDataUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\UserSendDataUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AppServiceContract\UserUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core.AppServiceContract\UserUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AttachmentData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\AttachmentData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AttachmentDataDownload.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\AttachmentDataDownload.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AttachmentRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\AttachmentRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AttachmentReturnMessageData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\AttachmentReturnMessageData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AuditLogCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\AuditLogCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\AuditLogSearchCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\AuditLogSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ConfigurationCategoryCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ConfigurationCategoryCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\FileInfoCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\FileInfoCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\FileInfoData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\FileInfoData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\FileUploadUpdateRequest.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\FileUploadUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\LoginResult.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\LoginResult.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\MenuCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\MenuCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\OperationCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\OperationCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\OrganizationUnitCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\OrganizationUnitCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\OrganizationUnitTranslateData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\OrganizationUnitTranslateData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\OuConfigurationCriteria.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\OuConfigurationCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ResourceData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ResourceData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\ResourceRelationCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\ResourceRelationCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\RouteCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\RouteCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\UnityRegisCode.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\UnityRegisCode.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\UserCriteria01.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\UserCriteria01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\UserData.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\UserData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\UserLoginResult.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\UserLoginResult.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\Core\Scripts\UserProfile.ts">
+      <CustomToolNamespace>..\Fs.Erp.Core\UserProfile.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\AttachmentRequest.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\AttachmentRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\DeviceData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\DeviceData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\DeviceParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\DeviceParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\DeviceSearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\DeviceSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ExportCodeRequest.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ExportCodeRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FactoryAndFarmData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FactoryAndFarmData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FactoryAppService.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\IFactoryAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FactoryData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FactoryData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FactoryParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FactoryParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FactorySearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FactorySearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FarmAppService.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\IFarmAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FarmData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FarmData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FarmParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FarmParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FarmSearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FarmSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FindUserByExternalIdRequest.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FindUserByExternalIdRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FirstLoginCreatePasswordData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FirstLoginCreatePasswordData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\FirstLoginCreatePasswordRequest.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\FirstLoginCreatePasswordRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\GenerateCodeAppService.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\IGenerateCodeAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\GenerateCodeData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\GenerateCodeData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\GenerateCodeDetailData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\GenerateCodeDetailData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\GenerateCodeParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\GenerateCodeParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\GenerateCodeRequest.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\GenerateCodeRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\GenerateCodeSearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\GenerateCodeSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ManageUserAppService.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\IManageUserAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ManageUserGroupAppService.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\IManageUserGroupAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ManageUserGroupMemberSearchParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ManageUserGroupMemberSearchParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\OrderAppService.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\IOrderAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\OrderData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\OrderData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\OrderParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\OrderParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\OrderSearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\OrderSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\PlotDeviceData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\PlotDeviceData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\PlotParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\PlotParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\PlotSearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\PlotSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ProductData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ProductData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ProductMasterData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ProductMasterData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ProductMasterSearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ProductMasterSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ProductMobileAppService.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\IProductMobileAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ProductParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ProductParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ProductProcessingData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ProductProcessingData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ProductSearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ProductSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ProductTypeData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ProductTypeData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\QRData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\QRData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ReligionData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ReligionData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\RemoveResponsiblePersonData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\RemoveResponsiblePersonData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ResponsiblePersonData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ResponsiblePersonData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ResponsiblePersonParameter.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ResponsiblePersonParameter.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\ResponsiblePersonSearchCriteria.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\ResponsiblePersonSearchCriteria.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\TeaTypeData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\TeaTypeData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\UploadFileAppService.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\IUploadFileAppService.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\UserData01.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\UserData01.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\UserProfileData.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\UserProfileData.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\UserUpdateRequest.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\UserUpdateRequest.cs</CustomToolNamespace>
+    </None>
+    <None Update="app\src\Modules\WanaD\Scripts\AppServiceContract\WanaDOperationResources.ts">
+      <CustomToolNamespace>..\WanaD.AppServiceContract\WanaDOperationResources.cs</CustomToolNamespace>
+    </None>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="app\src\Modules\WanaD\Components\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <UsingTask TaskName="TransformXML" AssemblyFile="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Web\Microsoft.Web.Publishing.Tasks.dll"></UsingTask>
+  <Target Name="TransformConfiguration" AfterTargets="BeforeBuild">
+    <TransformXml Source="Web.Template.config" Transform="Web.$(Configuration).config" Destination="Web.config" />
+  </Target>
+  
+</Project>

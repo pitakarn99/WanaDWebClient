@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ACLCriteria.cs" />
+    <Compile Remove="ACLData.cs" />
+    <Compile Remove="AttachmentData.cs" />
+    <Compile Remove="AttachmentDataDownload.cs" />
+    <Compile Remove="AttachmentRequest.cs" />
+    <Compile Remove="AttachmentReturnMessageData.cs" />
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="OrganizationUnitCriteria01.cs" />
+    <Compile Remove="OrganizationUnitTranslateData.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+    <Compile Remove="RouteCriteria01.cs" />
+    <Compile Remove="UnityRegisCode.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Fs.Erp.Core%28NetStandard%29.project.json" />
+    <None Remove="Fs.Erp.Core%28NetStandard%29.project.lock.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

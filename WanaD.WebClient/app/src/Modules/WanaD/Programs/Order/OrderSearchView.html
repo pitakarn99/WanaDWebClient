@@ -1,0 +1,175 @@
+﻿<template>
+    <require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+    <require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+    <require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+    <require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+
+    <div slot="content">
+        <style>
+            .alnright {
+                text-align: right;
+            }
+
+            .alncenter {
+                text-align: center;
+            }
+        </style>
+
+        <div class="card card-all" style="padding:40px !important; margin-left:2px !important;">
+            <div class="kt-portlet__head-label"><h3 class="kt-portlet__head-title"><span t="WanaD.Order:OrderPage.Order"></span></h3></div>
+
+            <br />
+
+            <div id="find-factory" class="row" style="align-items:center;">
+                <div class="col-1"><span t="WanaD.Order:OrderPage.Factory"></span></div>
+                <div class="col-4">
+                    <select2 search-auto-complete-function.bind="(e) => FindFactoryAutoComplete(e.params, e.success, e.failure)"
+                             calculate-item-id="Id"
+                             calculate-item-text="NameTH"
+                             name="SelectedFactory"
+                             is-multiple.bind="false"
+                             t="[placeholder]WanaD.Order:OrderPage.Factory"
+                             selected-items.bind="SelectedFactory">
+                    </select2>
+                </div>
+                <div class="col-1"><span t="WanaD.Order:OrderPage.OrderStatus"></span></div>
+                <div class="col-2">
+                    <select class="form-control" value.bind="OrderStatusId">
+                        <option value.bind="">-- กรุณาเลือก --</option>
+                        <option repeat.for="item of OrderStatusDatas" model.bind="item.Id" selected>
+                            ${item.Name}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <br />
+
+            <div id="find-request-date" class="row" style="align-items:center;">
+                <!-- Request Date Section -->
+                <div class="col-1"><span t="WanaD.Order:OrderPage.RequestDate"></span></div>
+                <div class="col-2">
+                    <fs-datetime-picker style="text-align: center"
+                                        display-name="RequestDateFrom"
+                                        sorting-name="RequestDateFrom"
+                                        onkeydown="return false"
+                                        icon-base="font-awesome"
+                                        with-date-icon="true"
+                                        t="[placeholder]WanaD.Order:OrderPage.RequestDateFrom"
+                                        model.bind="RequestDateFrom"
+                                        button-class="btn btn-primary btn-sm"
+                                        options.bind="{ format: 'D/MM/YYYY',useCurrent: false }">
+                    </fs-datetime-picker>
+                </div>
+
+                <div class="col-2">
+                    <fs-datetime-picker style="text-align: center"
+                                        display-name="RequestDateTo"
+                                        sorting-name="RequestDateTo"
+                                        onkeydown="return false"
+                                        icon-base="font-awesome"
+                                        with-date-icon="true"
+                                        t="[placeholder]WanaD.Order:OrderPage.RequestDateTo"
+                                        model.bind="RequestDateTo"
+                                        button-class="btn btn-primary btn-sm"
+                                        options.bind="{ format: 'D/MM/YYYY',useCurrent: false }">
+                    </fs-datetime-picker>
+                </div>
+
+                <!-- Due Date Section -->
+                <div class="col-1"><span t="WanaD.Order:OrderPage.DueDate"></span></div>
+                <div class="col-2">
+                    <fs-datetime-picker style="text-align: center"
+                                        display-name="DueDateFrom"
+                                        sorting-name="DueDateFrom"
+                                        onkeydown="return false"
+                                        icon-base="font-awesome"
+                                        with-date-icon="true"
+                                        placeholder="Due Date From"
+                                        t="[placeholder]WanaD.Order:OrderPage.DueDateFrom"
+                                        model.bind="DueDateFrom"
+                                        button-class="btn btn-primary btn-sm"
+                                        options.bind="{ format: 'D/MM/YYYY',useCurrent: false }">
+                    </fs-datetime-picker>
+                </div>
+
+                <div class="col-2">
+                    <fs-datetime-picker style="text-align: center"
+                                        sorting-name="DueDateTo"
+                                        display-name="DueDateTo"
+                                        onkeydown="return false"
+                                        icon-base="font-awesome"
+                                        with-date-icon="true"
+                                        t="[placeholder]WanaD.Order:OrderPage.DueDateTo"
+                                        model.bind="DueDateTo"
+                                        button-class="btn btn-primary btn-sm"
+                                        options.bind="{ format: 'D/MM/YYYY',useCurrent: false }">
+                    </fs-datetime-picker>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-12 d-flex">
+
+                    <div class="btn btn-primary" disabled.bind="HasEditingChilds == true" click.trigger="SearchAsync()"><span t="WanaD.Order:OrderPage.Search"></span> <i class="bi bi-search"></i></div>
+                    <div class="btn btn-outline-secondary ms-1" disabled.bind="HasEditingChilds == true" click.trigger="ClearAsync()"><span t="WanaD.Order:OrderPage.Reset"></span> <i class="bi bi-arrow-clockwise"></i></div>
+                    <div style="margin-left: auto"></div>
+                    <div class="btn btn-primary" disabled.bind="HasEditingChilds == true" click.trigger="AddOrder()"><span t="WanaD.Order:OrderPage.RequestOrder"></span> <i class="bi bi-plus-circle-fill"></i></div>
+                </div>
+            </div>
+
+            <br />
+
+            <div id="divPaging">
+                <div id="divTable" class="row">
+                    <table class="table">
+                        <thead>
+                            <tr align="center" style="vertical-align: baseline;">
+                                <th><fs-grid-header t="WanaD.Order:OrderPage.OrderNo" sorting-name="OrderNo"></fs-grid-header></th>
+                                <th><fs-grid-header t="WanaD.Order:OrderPage.Factory" sorting-name="Factory"></fs-grid-header></th>
+                                <th><span t="WanaD.Order:OrderPage.ProductType"></span></th>
+                                <th><span t="WanaD.Order:OrderPage.ProductName"></span></th>
+                                <th><span t="WanaD.Order:OrderPage.RequestedQuantity"></span></th>
+                                <th><span t="WanaD.Order:OrderPage.ReceivedQuantity"></span></th>
+                                <th><span t="WanaD.Order:OrderPage.RequestedDate"></span></th>
+                                <th><span t="WanaD.Order:OrderPage.DueDate"></span></th>
+                                <th><span t="WanaD.Order:OrderPage.Price"></span></th>
+                                <th><span t="WanaD.Order:OrderPage.PaidAmount"></span></th>
+                                <th><span t="WanaD.Order:OrderPage.OrderStatus"></span></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="data-body" repeat.for="item of SearchResultCollectionView">
+                                <td>${item.OrderNo}</td>
+                                <td>${item.FactoryName}</td>
+                                <td>${item.ProductTypeName}</td>
+                                <td>${item.ProductName}</td>
+                                <td class="alnright">${ShowNumber(item.Quantity)}</td>
+                                <td class="alnright">${item.Received.toLocaleString()}&nbsp;(${item.Percent.toFixed(2)}%)</td>
+                                <td class="alncenter">${item.RequestDate | dateFormat:'DD-MM-YYYY'}</td>
+                                <td class="alncenter">${item.DueDate | dateFormat:'DD-MM-YYYY'}</td>
+                                <td class="alnright">${ShowNumber(item.Price)}</td>
+                                <td class="alnright">${item.PaidAmount == 0 ? item.PaidAmount.toFixed(2) : ShowNumber(item.PaidAmount)}</td>
+                                <td class="alncenter">${item.StatusName}</td>
+                                <td class="d-flex" style="cursor: pointer;">
+                                    <div class="align-middle " click.trigger="ViewData(item)">
+                                        <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M49.2245 24.4249C42.6467 24.4249 36.3383 27.0379 31.6871 31.6891C27.0359 36.3403 24.4229 42.6486 24.4229 49.2264C24.4229 55.8042 27.0359 62.1126 31.6871 66.7638C36.3383 71.415 42.6467 74.028 49.2245 74.028C55.8023 74.028 62.1107 71.415 66.7619 66.7638C71.4131 62.1126 74.0261 55.8042 74.0261 49.2264C74.0261 42.6486 71.4131 36.3403 66.7619 31.6891C62.1107 27.0379 55.8023 24.4249 49.2245 24.4249ZM16.9824 49.2264C16.9824 40.6753 20.3793 32.4744 26.4259 26.4279C32.4725 20.3813 40.6734 16.9844 49.2245 16.9844C57.7756 16.9844 65.9765 20.3813 72.0231 26.4279C78.0696 32.4744 81.4666 40.6753 81.4666 49.2264C81.4666 57.7776 78.0696 65.9785 72.0231 72.025C65.9765 78.0716 57.7756 81.4685 49.2245 81.4685C40.6734 81.4685 32.4725 78.0716 26.4259 72.025C20.3793 65.9785 16.9824 57.7776 16.9824 49.2264Z" fill="#5A4A42" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M68.9161 68.9191C69.6137 68.2224 70.5592 67.8311 71.5451 67.8311C72.531 67.8311 73.4765 68.2224 74.1741 68.9191L94.0153 88.7603C94.3808 89.1009 94.674 89.5116 94.8773 89.968C95.0807 90.4243 95.19 90.9169 95.1988 91.4165C95.2076 91.916 95.1157 92.4122 94.9286 92.8754C94.7415 93.3386 94.463 93.7594 94.1098 94.1127C93.7565 94.466 93.3357 94.7445 92.8725 94.9316C92.4092 95.1187 91.913 95.2106 91.4135 95.2017C90.914 95.1929 90.4214 95.0836 89.965 94.8803C89.5087 94.6769 89.098 94.3838 88.7574 94.0183L68.9161 74.177C68.2194 73.4794 67.8281 72.5339 67.8281 71.548C67.8281 70.5622 68.2194 69.6166 68.9161 68.9191Z" fill="#5A4A42" />
+                                        </svg>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <fs-paging></fs-paging>
+            </div>
+
+        </div>
+
+    </div>
+</template>

@@ -1,0 +1,31 @@
+﻿<ux-dialog>
+  <ux-dialog-body class="container-fluid">
+    <au-compose template="${view}" component.bind="viewModel"></au-compose>
+  </ux-dialog-body>
+  <ux-dialog-footer>
+    <input
+      type="button"
+      value="Save"
+      show.bind="viewModel.IsItemEditing"
+      click.trigger="UpdateAsync()"
+    />
+    <input
+      type="button"
+      value="Cancel"
+      show.bind="viewModel.IsItemEditing"
+      click.trigger="CancelAsync()"
+    />
+    <input
+      type="button"
+      value="Edit"
+      show.bind="!viewModel.IsItemEditing"
+      click.trigger="EditAsync()"
+    />
+    <input
+      type="button"
+      value="Close"
+      show.bind="!viewModel.IsItemEditing"
+      click.trigger="CancelAsync()"
+    />
+  </ux-dialog-footer>
+</ux-dialog>

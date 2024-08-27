@@ -1,0 +1,80 @@
+﻿    <require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+    <require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+
+    <require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+    <require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+
+    <require from="Lib/Fs.Core.Aurelia/Components/select2"></require>
+
+    <div>
+        <style>
+            .pd-col {
+                padding-top: .75rem;
+            }
+        </style>
+        <div style="background: white; padding: 100px;">
+        
+                <div class="d-flex">
+                  
+                    <div class="col-3">
+
+
+                                <select2 search-auto-complete-function.bind="(e) => FindUserDataAsync(e.params, e.success, e.failure)"
+                                         calculate-item-id="UserUID" calculate-item-text="Name"
+                                         
+                                         name="SelectUser" is-multiple.bind="false" placeholder="Search"
+                                         selected-values.bind="SelectedUserId" selected-items.bind="SelectedUser"></select2>
+                         
+                    </div>
+                    <div style="margin-left:auto"></div>
+                    <div class="col-2" style="padding-left: 3px">
+                        <button class="align-middle btn btn-primary" click.trigger="SaveAsync()">Add User <i class="bi bi-plus-circle-fill"></i></button>
+                    </div>
+                </div>
+                <br />
+                <div class="data-allpage row">
+                    <div class="container kt-datatable__table">
+                        <table class="table">
+                            <thead >
+                                <tr >
+                                    <th>
+                                        <div></div>
+                                    </th>
+                                    <th>
+                                        <fs-grid-header display-name="Name" sorting-name="Name"></fs-grid-header>
+                                    </th>
+                                    <th>
+                                        <div></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <tr class="data-body" repeat.for="item of SearchResultCollectionView"
+                                    class.bind="item === CurrentItem ? 'selected' : ''">
+                                    <td class="kt-datatable__cell">
+                                        <input type="checkbox" change.trigger="SelectChanged(item, $event.target.checked, $event)" checked.bind="item.IsChecked" />
+                                    </td>
+                                    <td class="kt-datatable__cell">
+                                        <div class="align-middle">${item.UserName}</div>
+                                    </td>
+                                    <td class="kt-datatable__cell">
+                                        <div class="align-middle mx-3"  click.trigger="RemoveCommandAsync(item)">
+                                            <svg width="21" height="21" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.33829 56.1307L50.8009 4.87695H50.8077L50.9565 4.71282C53.4087 2.00854 56.7231 0.5 60.1673 0.5C63.6114 0.5 66.9258 2.00852 69.378 4.71276C69.378 4.71278 69.378 4.7128 69.378 4.71282L95.6617 33.7068C98.1147 36.4136 99.5 40.0938 99.5 43.9402C99.5 47.7866 98.1147 51.4669 95.6617 54.1736L58.3942 95.284L58.3942 95.2841C55.9424 97.9895 52.6279 99.4992 49.1834 99.5H30.4887C27.0443 99.4992 23.7299 97.9895 21.2781 95.2841L21.278 95.284L4.33829 76.5975C4.33827 76.5975 4.33826 76.5975 4.33824 76.5974C1.8853 73.8907 0.5 70.2105 0.5 66.3641C0.5 62.5177 1.8853 58.8375 4.33824 56.1308C4.33825 56.1308 4.33827 56.1308 4.33829 56.1307ZM55.0063 9.32565L55.0062 9.3257L23.6134 43.9557L23.309 44.2915L23.6134 44.6273L59.4784 84.1906L59.8488 84.5992L60.2192 84.1906L91.6121 49.5606L91.6121 49.5605C92.97 48.0622 93.7255 46.0398 93.7255 43.9402C93.7255 41.8406 92.97 39.8183 91.6121 38.3199L91.6121 38.3198L65.3283 9.3257L64.9578 9.66152L65.3282 9.32565C63.9684 7.82609 62.1133 6.97304 60.1673 6.97304C58.2212 6.97304 56.3661 7.82609 55.0063 9.32565ZM8.3947 71.9845L25.3344 90.6711C26.694 92.1712 28.5491 93.0249 30.4954 93.0254H49.1903C51.1366 93.0249 52.9918 92.1712 54.3513 90.6711L55.4354 89.4752L56.1931 88.6394H55.2798L19.5637 49.2403L19.1933 48.8316L18.8228 49.2403L8.3947 60.7437L8.39465 60.7438C7.03675 62.2422 6.28125 64.2645 6.28125 66.3641C6.28125 68.4637 7.03675 70.4861 8.39465 71.9845L8.3947 71.9845Z" fill="#5A4A42" stroke="#5A4A42" />
+                                            </svg>
+
+                                        </div>
+                                  
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <fs-paging ></fs-paging>
+                     
+                    </div>
+                </div>
+            </div>
+
+
+
+    </div>

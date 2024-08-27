@@ -1,0 +1,178 @@
+﻿<template>
+    <require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+    <require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+    <require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+    <require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+    <require from="Lib/Fs.Core.Aurelia/Components/fs-datetime-picker"></require>
+
+
+    <div slot="content">
+
+
+        <div class="card card-all">
+            <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">
+                    Manage User Information
+                </h3>
+            </div>
+
+            <br />
+
+            <div>
+                <h3 class="sub-kt-portlet__head-title">General Information :</h3>
+
+            </div>
+
+            <br />
+
+            <div id="row1" class="row mt-3">
+                <div class="col-2">Name (EN) <span class="require">*</span> :</div>
+                <div class="col-4">
+                    <input type="text" class.bind="NameEnErrors.length==0? 'form-control':'form-control is-invalid' " value.bind="NameEn  & validate" disabled.bind="!IsEditing" validation-errors.from-view="NameEnErrors">
+                    <span repeat.for="error of NameEnErrors" class="require">${error.result.message}</span>
+                </div>
+
+                <div class="col-2">Surname (EN) <span class="require">*</span> : </div>
+                <div class="col-4">
+                    <input type="text" class.bind="SurnameEnErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="SurnameEn  & validate" disabled.bind="!IsEditing" validation-errors.from-view="SurnameEnErrors">
+                    <span repeat.for="error of SurnameEnErrors" class="require">${error.result.message}</span>
+                </div>
+            </div>
+
+            <div id="row1" class="row mt-3">
+                <div class="col-2">Name (TH) <span class="require">*</span> :</div>
+                <div class="col-4">
+                    <input type="text" class.bind="NameTHErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="NameTH  & validate" disabled.bind="!IsEditing" validation-errors.from-view="NameTHErrors">
+                    <span repeat.for="error of NameTHErrors" class="require">${error.result.message}</span>
+                </div>
+                <div class="col-2">Surname (TH) <span class="require">*</span> : </div>
+                <div class="col-4">
+                    <input type="text" class.bind="SurnameTHErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="SurnameTH  & validate" disabled.bind="!IsEditing" validation-errors.from-view="SurnameTHErrors">
+                    <span repeat.for="error of SurnameTHErrors" class="require">${error.result.message}</span>
+                </div>
+            </div>
+
+            <div id="row2" class="row mt-3">
+
+                <div class="col-2">Date of Birth <span class="require">*</span> : </div>
+                <div class="col-4" validation-errors.from-view="DateofBirthErrors">
+                    <fs-datetime-picker class.bind="DateofBirthErrors.length==0? '':'datetimepicker-is-invalid'"
+                                        style="text-align: center"
+                                        display-name="Date"
+                                        sorting-name="Date"
+                                        onkeydown="return false"
+                                        icon-base="font-awesome"
+                                        with-date-icon="true"
+                                        placeholder="Input Date Of Birth"
+                                        button-class="btn btn-primary"
+                                        show.bind="IsEditing"
+                                        model.bind="DateofBirth & validate"
+                                        options.bind="{ format: 'D/M/YYYY',useCurrent: false }">
+                    </fs-datetime-picker>
+                    <div class="form-control thisdisabled" show.bind="!IsEditing" >${DateofBirth | dateFormat:'D/M/YYYY'}</div>
+                    <span repeat.for="error of DateofBirthErrors" class="require">${error.result.message}</span>
+                </div>
+                <div class="col-2">Phone No <span class="require">*</span> :</div>
+                <div class="col-4">
+                    <input type="text" class.bind="PhoneNoErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="PhoneNo  & validate" disabled.bind="!IsEditing" validation-errors.from-view="PhoneNoErrors">
+                    <span repeat.for="error of PhoneNoErrors" class="require">${error.result.message}</span>
+                </div>
+
+
+            </div>
+
+            <div id="row3" class="row mt-3">
+                <div class="col-2">Ethnicity <span class="require">*</span> : </div>
+                <div class="col-4">
+                    <select class.bind="EthnicityIdErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="EthnicityId & validate" disabled.bind="!IsEditing" validation-errors.from-view="EthnicityIdErrors">
+                        <option value.bind="">-- กรุณาเลือก --</option>
+                        <option repeat.for="item of EthnicityDatas" model.bind="item.Id" selected>
+                            ${item.DisplayName}
+                        </option>
+                    </select>
+                    <span repeat.for="error of EthnicityIdErrors" class="require">${error.result.message}</span>
+                </div>
+                <div class="col-2">Religion <span class="require">*</span> :</div>
+                <div class="col-4">
+                    <select class.bind="ReligionIdErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="ReligionId & validate" disabled.bind="!IsEditing" validation-errors.from-view="ReligionIdErrors">
+                        <option value.bind="">-- กรุณาเลือก --</option>
+                        <option repeat.for="item of ReligionDatas" model.bind="item.Id" selected>
+                            ${item.DisplayName}
+                        </option>
+                    </select>
+                    <span repeat.for="error of ReligionIdErrors" class="require">${error.result.message}</span>
+                </div>
+
+            </div>
+
+            <div id="row4" class="row mt-3">
+
+                <div class="col-2">Password <span class="require">*</span> :</div>
+                <div class="col-4">
+                    <div class="input-group">
+                        <input type="text" class.bind="PasswordErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="Password  & validate" disabled.bind="!IsEditing ||HasOriginalSource" validation-errors.from-view="PasswordErrors">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" click.trigger="GeneratePassword()" disabled.bind="HasOriginalSource">Generate</button>
+                        </div>
+                    </div>
+
+
+                    <span repeat.for="error of PasswordErrors" class="require">${error.result.message}</span>
+                </div>
+                <div class="col-2">ID Number <span class="require">*</span> : </div>
+                <div class="col-4">
+                    <input type="text" class.bind="IdCardNoErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="IdCardNo  & validate" disabled.bind="!IsEditing" validation-errors.from-view="IdCardNoErrors">
+                    <span repeat.for="error of IdCardNoErrors" class="require">${error.result.message}</span>
+                </div>
+            </div>
+
+            <div id="row5" class="row mt-3">
+                <div class="col-2">Gender <span class="require">*</span> :</div>
+                <div class="col-4">
+                    <div validation-errors.from-view="GenderErrors">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Gender" checked.bind="Gender" model.bind="1" disabled.bind="!IsEditing">
+                            <label class="form-check-label" for="exampleRadios1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Gender" checked.bind="Gender" model.bind="2" disabled.bind="!IsEditing">
+                            <label class="form-check-label" for="exampleRadios1">Female</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Gender" checked.bind="Gender" model.bind="3" disabled.bind="!IsEditing">
+                            <label class="form-check-label" for="exampleRadios1">Not Specified</label>
+                        </div>
+                        <input type="hidden" value.bind="Gender & validate" />
+                    </div>
+
+                    <span repeat.for="error of GenderErrors" class="require d-block">${error.result.message}</span>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="IsThaiNationality" checked.bind="IsThaiNational" model.bind="true" disabled.bind="!IsEditing">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Do not have Thai Nationality 
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="row6" class="row mt-3">
+                <div class="col-2">Address <span class="require">*</span> :</div>
+                <div class="col">
+                    <textarea class.bind="AddressErrors.length==0? 'form-control':'form-control is-invalid'" rows="3" value.bind="Address  & validate" disabled.bind="!IsEditing" validation-errors.from-view="AddressErrors"></textarea>
+                    <span repeat.for="error of AddressErrors" class="require">${error.result.message}</span>
+                </div>
+            </div>
+            <br />
+            <div class="d-flex">
+                <button class="btn btn-primary" click.trigger="Back()" show.bind="!$this.IsEditing">Back</button>
+                <div class="mx-auto"></div>
+                <button class="btn btn-outline-secondary me-2" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="CancelAsync()">Cancel</button>
+                <button class="btn btn-primary" disabled.bind="$this.IsEditing" show.bind="!$this.IsEditing" click.trigger="BeginEdit()">Edit</button>
+                <button class="btn btn-primary " disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="SaveData()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</template>

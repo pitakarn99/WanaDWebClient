@@ -1,0 +1,117 @@
+﻿<require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-datetime-picker"></require>
+
+<div class="card card-all">
+    <div class="kt-portlet__head-label">
+        <h3 class="kt-portlet__head-title">
+            Factory Information
+        </h3>
+    </div>
+
+    <br />
+
+    <div>
+        <h4 style="color: #628369;">General Information:</h4>
+    </div>
+
+    <br />
+
+    <div id="row1" class="row">
+        <div class="col-2">Factory Name (EN) <span class="require">*</span> :</div>
+        <div class="col-4">
+            <input type="text" class.bind="NameENErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="NameEN & validate" disabled.bind="!IsEditing" validation-errors.from-view="NameENErrors">
+            <span repeat.for="error of NameENErrors" class="require">${error.result.message}</span>
+        </div>
+        <div class="col-2">Factory Name (TH) <span class="require">*</span> : </div>
+        <div class="col-4">
+            <input type="text" class.bind="NameTHErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="NameTH & validate" disabled.bind="!IsEditing" validation-errors.from-view="NameTHErrors">
+            <span repeat.for="error of NameTHErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <div id="row2" class="row mt-3">
+        <div class="col-2">Address <span class="require">*</span> :</div>
+        <div class="col">
+            <textarea class.bind="AddressErrors.length==0? 'form-control':'form-control is-invalid'" rows="3" value.bind="Address & validate" disabled.bind="!IsEditing" validation-errors.from-view="AddressErrors"></textarea>
+            <span repeat.for="error of AddressErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h4 style="color: #628369;">Payment Information:</h4>
+    </div>
+
+    <div id="row3" class="row mt-3">
+        <div class="col-2">Bank <span class="require">*</span> : </div>
+        <div class="col-4">
+            <select class.bind="BankIdErrors.length==0 ? 'form-control':'form-control is-invalid'" value.bind="BankId & validate" validation-errors.from-view="BankIdErrors" disabled.bind="!IsEditing">
+                <option value.bind="">-- กรุณาเลือก --</option>
+                <option repeat.for="item of BankDatas" model.bind="item.Id" selected>
+                    ${item.DisplayName}
+                </option>
+            </select>
+            <span repeat.for="error of BankIdErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <div id="row4" class="row mt-3">
+        <div class="col-2">Bank Account No. <span class="require">*</span> :</div>
+        <div class="col-4">
+            <input type="text" class.bind="BankAccountNoErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="BankAccountNo & validate" disabled.bind="!IsEditing" validation-errors.from-view="BankAccountNoErrors">
+            <span repeat.for="error of BankAccountNoErrors" class="require">${error.result.message}</span>
+        </div>
+
+    </div>
+
+    <div id="row5" class="row mt-3">
+        <div class="col-2">Bank Account Holder <span class="require">*</span> : </div>
+        <div class="col-4">
+            <input type="text" class.bind="BankAccountHolderErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="BankAccountHolder & validate" disabled.bind="!IsEditing" validation-errors.from-view="BankAccountHolderErrors">
+            <span repeat.for="error of BankAccountHolderErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <div id="row6" class="row mt-3">
+        <div class="col-2">Active :</div>
+        <div class="col-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="IsActive" checked.bind="IsActive" model.bind="true" disabled.bind="!IsEditing" checked>
+                <label class="form-check-label" for="defaultCheck1">Is Active</label>
+            </div>            
+        </div>
+    </div>
+
+    <br />
+
+    <div id="button-section" class="d-flex justify-content-between">
+        <div id="div-back-page">
+            <button class="btn btn-primary" click.trigger="BackPage()">Back</button>
+        </div>
+        <div id="div-add-data" style="text-align:right">
+            <button class="btn btn-outline-secondary me-2" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="CancelAsync()">Cancel</button>
+            <button class="btn btn-primary " disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="SaveData()">Save</button>
+            <button class="btn btn-primary" disabled.bind="$this.IsEditing" show.bind="!$this.IsEditing" click.trigger="BeginEdit()">Edit</button>
+        </div>
+    </div>
+
+</div>
+
+<br />
+<br />
+
+<div class="none-card-all" show.bind="FactoryId != null">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation" style="padding-right: 10px;">
+            <button class="nav-link active font-18px" id="FactoryMemberSearchVM-tab" data-bs-toggle="tab" data-bs-target="#FactoryMemberSearchVM-tab-pane" type="button" role="tab" aria-controls="FactoryMemberSearchVM-tab-pane" aria-selected="true">Manage Staff</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="FactoryMemberSearchVM-tab-pane" role="tabpanel" aria-labelledby="FactoryMemberSearchVM-tab" tabindex="0">
+            <au-compose if.bind="FactoryMemberSearchVM != null" component.bind="FactoryMemberSearchVM"></au-compose>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+
+<div slot="content">
+  <div class="kt-portlet">
+    <div class="kt-portlet-body">
+      <div>
+        <button
+          class="btn btn-primary px-6 font-weight-bold"
+          disabled.bind="HasEditingChilds == true"
+          click.trigger="SearchAsync()"
+        >
+          <span>Search</span>
+        </button>
+      </div>
+      <div>
+        <span>Code</span>
+        <input value.bind="ConfigurationItemCode" />
+        <span>Name</span>
+        <input value.bind="ConfigurationItemName" />
+      </div>
+      <div
+        class="datatable datatable-default datatable-head-custom datatable-loaded"
+      >
+        <table class="datatable-table">
+          <thead class="datatable-head">
+            <tr class="datatable-row">
+              <th class="datatable-cell datatable-cell-sort" style="width: 30%">
+                <fs-grid-header
+                  display-name="Code"
+                  sorting-name="Code"
+                ></fs-grid-header>
+              </th>
+              <th class="datatable-cell datatable-cell-sort" style="width: 30%">
+                <fs-grid-header
+                  display-name="Name"
+                  sorting-name="Name"
+                ></fs-grid-header>
+              </th>
+              <th class="datatable-cell" style="width: 20%">action</th>
+            </tr>
+          </thead>
+          <tbody
+            class="datatable-body table-wrapper-scroll-y my-custom-scrollbar"
+          >
+            <tr
+              class="datatable-row"
+              repeat.for="item of SearchResultCollectionView"
+            >
+              <td class="datatable-cell" style="width: 30%">
+                  <div show.bind="!item.IsEditing">${item.ConfigurationItemCode}</div>
+                <div show.bind="item.IsEditing">
+                  <input
+                    value.bind="item.ConfigurationItemCode"
+                    style="width: 100%"
+                  />
+                </div>
+              </td>
+              <td class="datatable-cell" style="width: 30%">
+                  <div show.bind="!item.IsEditing">${item.ConfigurationItemValue}</div>
+                <div show.bind="item.IsEditing">
+                  <input
+                    value.bind="item.ConfigurationItemValue"
+                    style="width: 100%"
+                  />
+                </div>
+              </td>
+              <td class="datatable-cell" style="width: 20%">
+                <button
+                  type="button"
+                  class="btn btn-primary px-6 font-weight-bold"
+                  show.bind="!item.IsEditing"
+                  click.trigger="EditCommandAsync(item)"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-warning px-6 font-weight-bold"
+                  show.bind="!item.IsEditing"
+                  click.trigger="RemoveCommandAsync(item)"
+                >
+                  Remove
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-warning px-6 font-weight-bold"
+                  show.bind="item.IsEditing"
+                  click.trigger="UpdateCommandAsync(item)"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger px-6 font-weight-bold"
+                  show.bind="item.IsEditing"
+                  click.trigger="CancelCommandAsync(item)"
+                >
+                  Cancel
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div>
+          <fs-paging></fs-paging>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

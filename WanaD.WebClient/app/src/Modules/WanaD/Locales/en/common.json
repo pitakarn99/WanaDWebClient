@@ -1,0 +1,20 @@
+{
+  
+  "GeneralPopupConfirm": {
+    "OK": "ตกลง",
+    "Cancel": "ปิด"
+  },
+  "GeneralPopupEdit": {
+    "Save": "บันทึก",
+    "Cancel": "ยกเลิก",
+    "Edit": "แก้ไข",
+    "Close": "ปิด"
+  },
+  "Latout": {
+
+    "Region": "ภูมิภาค",
+    "Code": "Code",
+    "Name": "ชื่อ",
+    "Search": "ค้นหา"
+  }
+}

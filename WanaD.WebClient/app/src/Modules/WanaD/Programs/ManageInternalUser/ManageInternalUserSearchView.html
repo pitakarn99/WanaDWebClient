@@ -1,0 +1,103 @@
+﻿<template>
+    <require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+    <require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+    <require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+    <require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+
+    <div slot="content">
+
+        <div class="card card-all">
+
+            <div id="title-section" class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">
+                    Manage Internal User
+                </h3>
+            </div>
+
+            <div id="search-section" class="row">
+                <div class="col-md-12 d-flex">
+                    <input class="form-control" placeholder="Name" style="width:25%" value.bind="Name" />
+                    <div class="btn btn-primary ms-5" disabled.bind="HasEditingChilds == true" click.trigger="SearchAsync()">Search <i class="bi bi-search"></i></div>
+                    <div class="btn btn-outline-secondary ms-1" disabled.bind="HasEditingChilds == true" click.trigger="ClearAsync()">Reset <i class="bi bi-arrow-clockwise"></i></div>
+                    <div style="margin-left: auto"></div>
+                    <div class="btn btn-primary" disabled.bind="HasEditingChilds == true" click.trigger="AddCommand()">Add User <i class="bi bi-plus-circle-fill"></i></div>
+                </div>
+            </div>
+            <br />
+
+
+
+            <div id="divPaging">
+                <div id="divTable" class="row">
+                    <table class="table">
+                        <thead>
+                            <tr align="center">
+                                <th>
+                                    <fs-grid-header display-name="Name" sorting-name="Name"></fs-grid-header>
+                                </th>
+                                <th>
+                                    <fs-grid-header display-name="Email" sorting-name="Email"></fs-grid-header>
+                                </th>
+                                <th>
+                                    <fs-grid-header display-name="Active" sorting-name="IsActive"></fs-grid-header>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="data-body" repeat.for="item of SearchResultCollectionView"
+                                class.bind="item === CurrentItem ? 'selected' : ''">
+                                <td class="kt-datatable__cell">
+                                    <div show.bind="!item.IsEditing" class="align-middle">${item.Name}</div>
+                                </td>
+                                <td class="kt-datatable__cell">
+                                    <div show.bind="!item.IsEditing" class="align-middle">${item.Email}</div>
+                                </td>
+
+                                <td class="kt-datatable__cell" align="center">
+                                    <div show.bind="!item.IsEditing" class="align-middle">
+                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg" if.bind="item.IsActive">
+                                            <path d="M10.5 0C16.023 0 20.5 4.477 20.5 10C20.5 15.523 16.023 20 10.5 20C4.977 20 0.5 15.523 0.5 10C0.5 4.477 4.977 0 10.5 0ZM14.817 6.808C14.7081 6.69916 14.5629 6.63432 14.4092 6.62593C14.2555 6.61753 14.1041 6.66616 13.984 6.7625L13.933 6.808L8.875 11.866L7.067 10.058C6.95398 9.94494 6.80193 9.87949 6.64213 9.8751C6.48232 9.87072 6.32691 9.92773 6.20786 10.0344C6.08881 10.1411 6.01517 10.2894 6.00208 10.4487C5.98899 10.608 6.03745 10.7663 6.1375 10.891L6.183 10.942L8.433 13.192C8.54187 13.3008 8.68708 13.3657 8.8408 13.3741C8.99451 13.3825 9.14592 13.3338 9.266 13.2375L9.317 13.192L14.817 7.692C14.8751 7.63396 14.9211 7.56505 14.9525 7.48921C14.9839 7.41338 15.0001 7.33209 15.0001 7.25C15.0001 7.16791 14.9839 7.08662 14.9525 7.01079C14.9211 6.93495 14.8751 6.86604 14.817 6.808Z" fill="#628369" />
+                                        </svg>
+                                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg" if.bind="!item.IsActive">
+                                            <path d="M10.5 0C16.023 0 20.5 4.477 20.5 10C20.5 15.523 16.023 20 10.5 20C4.977 20 0.5 15.523 0.5 10C0.5 4.477 4.977 0 10.5 0ZM14.817 6.808C14.7081 6.69916 14.5629 6.63432 14.4092 6.62593C14.2555 6.61753 14.1041 6.66616 13.984 6.7625L13.933 6.808L8.875 11.866L7.067 10.058C6.95398 9.94494 6.80193 9.87949 6.64213 9.8751C6.48232 9.87072 6.32691 9.92773 6.20786 10.0344C6.08881 10.1411 6.01517 10.2894 6.00208 10.4487C5.98899 10.608 6.03745 10.7663 6.1375 10.891L6.183 10.942L8.433 13.192C8.54187 13.3008 8.68708 13.3657 8.8408 13.3741C8.99451 13.3825 9.14592 13.3338 9.266 13.2375L9.317 13.192L14.817 7.692C14.8751 7.63396 14.9211 7.56505 14.9525 7.48921C14.9839 7.41338 15.0001 7.33209 15.0001 7.25C15.0001 7.16791 14.9839 7.08662 14.9525 7.01079C14.9211 6.93495 14.8751 6.86604 14.817 6.808Z" fill="#F6F6F6" />
+                                        </svg>
+                                    </div>
+                                </td>
+
+                                <td class="kt-datatable__cell d-flex" style="cursor: pointer;">
+                                    <!--<button type="button" class="align-middle btn btn-primary" disabled.bind="!($parent.CurrentItem == null || ($parent.CurrentItem != null && !$parent.CurrentItem.IsEditing)) && !$parent.HasEditingChilds" show.bind="!item.IsEditing" click.trigger="item.EditUserUrl(item)">View</button>-->
+                                    <!--<button type="button" class="align-middle btn btn-warning" disabled.bind="!($parent.CurrentItem == null || ($parent.CurrentItem != null && !$parent.CurrentItem.IsEditing)) && !$parent.HasEditingChilds" show.bind="!item.IsEditing" click.trigger="RemoveCommandAsync(item)">Remove</button>-->
+
+                                    <div class="align-middle " click.trigger="item.EditUserUrl(item)">
+                                        <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M49.2245 24.4249C42.6467 24.4249 36.3383 27.0379 31.6871 31.6891C27.0359 36.3403 24.4229 42.6486 24.4229 49.2264C24.4229 55.8042 27.0359 62.1126 31.6871 66.7638C36.3383 71.415 42.6467 74.028 49.2245 74.028C55.8023 74.028 62.1107 71.415 66.7619 66.7638C71.4131 62.1126 74.0261 55.8042 74.0261 49.2264C74.0261 42.6486 71.4131 36.3403 66.7619 31.6891C62.1107 27.0379 55.8023 24.4249 49.2245 24.4249ZM16.9824 49.2264C16.9824 40.6753 20.3793 32.4744 26.4259 26.4279C32.4725 20.3813 40.6734 16.9844 49.2245 16.9844C57.7756 16.9844 65.9765 20.3813 72.0231 26.4279C78.0696 32.4744 81.4666 40.6753 81.4666 49.2264C81.4666 57.7776 78.0696 65.9785 72.0231 72.025C65.9765 78.0716 57.7756 81.4685 49.2245 81.4685C40.6734 81.4685 32.4725 78.0716 26.4259 72.025C20.3793 65.9785 16.9824 57.7776 16.9824 49.2264Z" fill="#5A4A42" />
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M68.9161 68.9191C69.6137 68.2224 70.5592 67.8311 71.5451 67.8311C72.531 67.8311 73.4765 68.2224 74.1741 68.9191L94.0153 88.7603C94.3808 89.1009 94.674 89.5116 94.8773 89.968C95.0807 90.4243 95.19 90.9169 95.1988 91.4165C95.2076 91.916 95.1157 92.4122 94.9286 92.8754C94.7415 93.3386 94.463 93.7594 94.1098 94.1127C93.7565 94.466 93.3357 94.7445 92.8725 94.9316C92.4092 95.1187 91.913 95.2106 91.4135 95.2017C90.914 95.1929 90.4214 95.0836 89.965 94.8803C89.5087 94.6769 89.098 94.3838 88.7574 94.0183L68.9161 74.177C68.2194 73.4794 67.8281 72.5339 67.8281 71.548C67.8281 70.5622 68.2194 69.6166 68.9161 68.9191Z" fill="#5A4A42" />
+                                        </svg>
+                                    </div>
+                                    <div class="align-middle mx-3" click.trigger="RemoveCommandAsync(item)">
+                                        <svg width="21" height="21" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.33829 56.1307L50.8009 4.87695H50.8077L50.9565 4.71282C53.4087 2.00854 56.7231 0.5 60.1673 0.5C63.6114 0.5 66.9258 2.00852 69.378 4.71276C69.378 4.71278 69.378 4.7128 69.378 4.71282L95.6617 33.7068C98.1147 36.4136 99.5 40.0938 99.5 43.9402C99.5 47.7866 98.1147 51.4669 95.6617 54.1736L58.3942 95.284L58.3942 95.2841C55.9424 97.9895 52.6279 99.4992 49.1834 99.5H30.4887C27.0443 99.4992 23.7299 97.9895 21.2781 95.2841L21.278 95.284L4.33829 76.5975C4.33827 76.5975 4.33826 76.5975 4.33824 76.5974C1.8853 73.8907 0.5 70.2105 0.5 66.3641C0.5 62.5177 1.8853 58.8375 4.33824 56.1308C4.33825 56.1308 4.33827 56.1308 4.33829 56.1307ZM55.0063 9.32565L55.0062 9.3257L23.6134 43.9557L23.309 44.2915L23.6134 44.6273L59.4784 84.1906L59.8488 84.5992L60.2192 84.1906L91.6121 49.5606L91.6121 49.5605C92.97 48.0622 93.7255 46.0398 93.7255 43.9402C93.7255 41.8406 92.97 39.8183 91.6121 38.3199L91.6121 38.3198L65.3283 9.3257L64.9578 9.66152L65.3282 9.32565C63.9684 7.82609 62.1133 6.97304 60.1673 6.97304C58.2212 6.97304 56.3661 7.82609 55.0063 9.32565ZM8.3947 71.9845L25.3344 90.6711C26.694 92.1712 28.5491 93.0249 30.4954 93.0254H49.1903C51.1366 93.0249 52.9918 92.1712 54.3513 90.6711L55.4354 89.4752L56.1931 88.6394H55.2798L19.5637 49.2403L19.1933 48.8316L18.8228 49.2403L8.3947 60.7437L8.39465 60.7438C7.03675 62.2422 6.28125 64.2645 6.28125 66.3641C6.28125 68.4637 7.03675 70.4861 8.39465 71.9845L8.3947 71.9845Z" fill="#5A4A42" stroke="#5A4A42" />
+                                        </svg>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <fs-paging></fs-paging>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+</template>

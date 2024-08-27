@@ -1,0 +1,26 @@
+{
+  "ProductListingPage": {
+    "ProductListing": "Product Listing",
+    "All":"All",
+    "New":"New",
+    "Delivered":"Delivered",
+    "ProductType": "Product Type",
+    "Create": "Create",
+    "Search": "Search",
+    "OrderNumber":"Order Number",
+    "Product":"Product",
+    "Quantity":"Quantity",
+    "Unit":"Unit",
+    "UnitPrice":"Unit Price",
+    "Price":"Price",
+    "DueDate":"Due Date",
+    "Status":"Status",
+    "Seemore":"Seemore",
+    "SelectOrder":"Select Order",
+    "ProductLotNumber":"Product Lot Number",
+    "Cancel":"Cancel",
+    "View":"View",
+    "ProductDate":"Product Date",
+    "Save":"Save"
+  }
+}

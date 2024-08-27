@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EBCB75DA-B4F1-4674-8693-04DFBB75BD13}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fs.Erp.Core.AppServiceContract</RootNamespace>
+    <AssemblyName>Fs.Erp.Core.AppServiceContract</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Fs.Erp.Core.AppServiceContract%28NetStandard%29.project.json" />
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountClosedData01.cs" />
+    <Compile Include="ACLCriteria01.cs" />
+    <Compile Include="ACLData01.cs" />
+    <Compile Include="ACLUpdateRequest.cs" />
+    <Compile Include="ApplicationCriteria01.cs" />
+    <Compile Include="ApplicationData01.cs" />
+    <Compile Include="ApplicationScopeUpdateRequest.cs" />
+    <Compile Include="ApplicationUpdateRequest.cs" />
+    <Compile Include="AuditLogCategoryData01.cs" />
+    <Compile Include="AuditLogData01.cs" />
+    <Compile Include="AuditLogMessageData01.cs" />
+    <Compile Include="AuditLogUpdateRequest.cs" />
+    <Compile Include="ChangePasswordUpdateRequest.cs" />
+    <Compile Include="ClosingData01.cs" />
+    <Compile Include="ConfigurationCategoryItemData01.cs" />
+    <Compile Include="ConfigurationCriteria01.cs" />
+    <Compile Include="ConfigurationItemData01.cs" />
+    <Compile Include="ConfigurationUpdateRequest.cs" />
+    <Compile Include="GroupCriteria01.cs" />
+    <Compile Include="GroupData01.cs" />
+    <Compile Include="GroupUpdateRequest.cs" />
+    <Compile Include="IACLService.cs" />
+    <Compile Include="IApplicationSecurityService.cs" />
+    <Compile Include="IApplicationService.cs" />
+    <Compile Include="IAuditLogService.cs" />
+    <Compile Include="IAuthenticationService.cs" />
+    <Compile Include="IChangePasswordService.cs" />
+    <Compile Include="IClientConfigurationService.cs" />
+    <Compile Include="IConfigurationService.cs" />
+    <Compile Include="IFileUploadService.cs" />
+    <Compile Include="IFormAuthenticationService.cs" />
+    <Compile Include="IMenuService.cs" />
+    <Compile Include="IResetPasswordService.cs" />
+    <Compile Include="IResourceRelationService.cs" />
+    <Compile Include="IResourceService.cs" />
+    <Compile Include="ISecurityAppService.cs" />
+    <Compile Include="ISecurityService.cs" />
+    <Compile Include="LanguageData.cs" />
+    <Compile Include="MemberCriteria01.cs" />
+    <Compile Include="MemberData01.cs" />
+    <Compile Include="MemberUpdateRequest.cs" />
+    <Compile Include="MenuData.cs" />
+    <Compile Include="MenuData01.cs" />
+    <Compile Include="MenuOperation.cs" />
+    <Compile Include="MenuResources.cs" />
+    <Compile Include="OperationData01.cs" />
+    <Compile Include="OperationUpdateRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResetPasswordResult.cs" />
+    <Compile Include="ResourceCriteria01.cs" />
+    <Compile Include="ResourceData01.cs" />
+    <Compile Include="ResourceRelationData01.cs" />
+    <Compile Include="Resources\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RoleCriteria01.cs" />
+    <Compile Include="RoleData01.cs" />
+    <Compile Include="RoleUpdateRequest.cs" />
+    <Compile Include="UploadFileInfo.cs" />
+    <Compile Include="UploadFileResult.cs" />
+    <Compile Include="UserData01.cs" />
+    <Compile Include="UserUpdateRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fs.Core.Validation.Entlib\Fs.Core.Validation.Entlib%28NetStandard%29.csproj">
+      <Project>{b9679f5a-b559-4e50-a920-82b8506e4eac}</Project>
+      <Name>Fs.Core.Validation.Entlib%28NetStandard%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fs.Core\Fs.Core%28NetStandard%29.csproj">
+      <Project>{f167f52b-5135-4b3a-b2fd-9e6577c27275}</Project>
+      <Name>Fs.Core%28NetStandard%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fs.Erp.Core\Fs.Erp.Core%28NetStandard%29.csproj">
+      <Project>{51cd71fc-2577-40c6-ba61-3a8f2a2ed94b}</Project>
+      <Name>Fs.Erp.Core%28NetStandard%29</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages.th.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,170 @@
+<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/select2"></require>
+<div slot="content">
+  <div class="kt-portlet">
+    <div class="kt-portlet-body">
+      <div>
+        <button
+          class="btn btn-primary px-6 font-weight-bold"
+          disabled.bind="HasEditingChilds == true"
+          click.trigger="SearchAsync()"
+        >
+          <span t="Core.Test:Test.Search"></span>
+        </button>
+        <button
+          class="btn btn-success px-6 font-weight-bold"
+          disabled.bind="HasEditingChilds == true"
+          click.trigger="CreateNewItem2()"
+        >
+          <span t="Core.Test:Test.Add"></span>
+        </button>
+      </div>
+      <div>
+        <span t="Core.Test:Test.Code"></span>
+        <input value.bind="Code" />
+        <span t="Core.Test:Test.Name"></span>
+        <input value.bind="Name" />
+
+        <span
+          t="Core.Test:Test.testInterpolation"
+          t-params.bind="{ what: 'i18next', how: 'great' }"
+        ></span>
+        <input value.bind="numbertest" type="number" />
+
+        test select2
+        <select2
+          items.bind="testselect2List"
+          calculate-item-id="Id"
+          calculate-item-text="Name"
+          selected-values.bind="testselect2value"
+          is-multiple.bind="false"
+        >
+        </select2>
+      </div>
+      <div
+        class="datatable datatable-default datatable-head-custom datatable-loaded"
+      >
+        <table class="datatable-table">
+          <thead class="datatable-head">
+            <tr class="datatable-row">
+              <th class="datatable-cell datatable-cell-sort" style="width: 30%">
+                <fs-grid-header
+                  display-name="Code"
+                  sorting-name="Code"
+                ></fs-grid-header>
+              </th>
+              <th class="datatable-cell datatable-cell-sort" style="width: 20%">
+                <fs-grid-header
+                  display-name="Name"
+                  sorting-name="Name"
+                ></fs-grid-header>
+              </th>
+              <th class="datatable-cell datatable-cell-sort" style="width: 20%">
+                <fs-grid-header
+                  display-name="Price"
+                  sorting-name="Price"
+                ></fs-grid-header>
+              </th>
+              <th class="datatable-cell" style="width: 20%">action</th>
+            </tr>
+          </thead>
+          <tbody
+            class="datatable-body table-wrapper-scroll-y my-custom-scrollbar"
+          >
+            <tr
+              class="datatable-row"
+              repeat.for="item of SearchResultCollectionView"
+            >
+              <td class="datatable-cell" style="width: 30%">
+                <div show.bind="!item.IsEditing">${item.Code}</div>
+                <div show.bind="item.IsEditing">
+                  <input
+                    value.bind="item.Code  & validate"
+                    style="width: 100%"
+                  />
+                </div>
+                <span
+                  class.bind="viewModel.CodeErrors.length"
+                  textcontent.bind="item.CodeErrors"
+                  style="color: red"
+                ></span>
+              </td>
+              <td class="datatable-cell" style="width: 30%">
+                <div show.bind="!item.IsEditing">${item.Name}</div>
+                <div show.bind="item.IsEditing">
+                  <input
+                    value.bind="item.Name & validate"
+                    style="width: 100%"
+                  />
+                </div>
+                <span
+                  class.bind="viewModel.NameErrors.length"
+                  textcontent.bind="item.NameErrors"
+                  style="color: red"
+                ></span>
+              </td>
+              <td class="datatable-cell" style="width: 30%">
+                <div show.bind="!item.IsEditing">
+                  <div>${item.Price | number:'0,0.00'}</div>
+                </div>
+                <div show.bind="item.IsEditing">
+                  <input
+                    value.bind="item.Price & validate"
+                    style="width: 100%"
+                    type="number"
+                  />
+                </div>
+                <span
+                  class.bind="viewModel.PriceErrors.length"
+                  textcontent.bind="item.PriceErrors"
+                  style="color: red"
+                ></span>
+              </td>
+              <td class="datatable-cell" style="width: 20%">
+                <button
+                  type="button"
+                  class="btn btn-primary px-6 font-weight-bold"
+                  show.bind="!item.IsEditing"
+                  click.trigger="View(item)"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-warning px-6 font-weight-bold"
+                  show.bind="!item.IsEditing"
+                  click.trigger="RemoveCommandAsync(item)"
+                >
+                  Remove
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-warning px-6 font-weight-bold"
+                  show.bind="item.IsEditing"
+                  click.trigger="UpdateCommandAsync(item)"
+                >
+                  Update
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-danger px-6 font-weight-bold"
+                  show.bind="item.IsEditing"
+                  click.trigger="CancelCommandAsync(item)"
+                >
+                  Cancel
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div>
+          <fs-paging></fs-paging>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

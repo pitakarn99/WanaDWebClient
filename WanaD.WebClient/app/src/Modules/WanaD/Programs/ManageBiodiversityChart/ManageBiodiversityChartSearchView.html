@@ -1,0 +1,52 @@
+﻿
+
+<div class="card card-all">
+    <div class="kt-portlet__head-label">
+        <h3 class="kt-portlet__head-title">
+            Biodiversity contract
+        </h3>
+    </div>
+    <div class="row">
+
+        <div class="col-12 d-flex row">
+            <div class="col-2 ">
+                Device
+            </div>
+            <div class="col-4 ">
+                <select2 search-auto-complete-function.bind="e=>FindDevice(e)"
+                         calculate-item-id="Id"
+                         calculate-item-text="DeviceNo"
+                         name="SingleAuto2"
+                         is-multiple.bind="false"
+                         placeholder="Select"
+                         selected-values.bind="DeviceId"></select2>
+
+            </div>
+            <div class="col-2 ">
+                Date
+            </div>
+            <div class="col-4">
+                <fs-datetime-picker style="text-align: center"
+                                    display-name="Date"
+                                    sorting-name="Date"
+                                    icon-base="font-awesome"
+                                    with-date-icon="true"
+                                    placeholder="Date"
+                                    button-class="btn btn-primary"
+                                    model.bind="DateRequest"
+                                    options.bind="{ format: 'D/M/YYYY',useCurrent: false }">
+                </fs-datetime-picker>
+            </div>
+            <div class="col-2"><div class="btn btn-primary" click.trigger="SearchAsync()">Search <i class="bi bi-search"></i></div></div>
+
+
+
+        </div>
+        <div>
+            <div class="text-center mt-2"show.bind="Data==null">No Results</div>
+            <div id="barChart"></div>
+            <div id="gidChart"></div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,22 @@
+{
+  "userManagerSettings": {
+    "accessTokenExpiringNotificationTime": 60,
+    "authority": "https://monsoon-dev.fissionsoft.co.th/IdentityServer",
+    "automaticSilentRenew": true,
+    "client_id": "monsoon-client",
+    "filterProtocolClaims": true,
+    "loadUserInfo": true,
+    "post_logout_redirect_uri": "https://localhost:9702/Client/Modules/Oidc/LogoutCallbackPage",
+    "redirect_uri": "https://localhost:9702/Client/Modules/Oidc/LoginCallbackPage",
+    "response_type": "code",
+    "scope": "openid profile monsoon-server",
+    "silentRequestTimeoutInSeconds": 10000,
+    "silent_redirect_uri": "https://localhost:9702/Client/Modules/Oidc/SilentLoginPage",
+    "userStore": {
+      "type": "WebStorageStateStore",
+      "prefix": "oidc",
+      "store": "window.localStorage"
+    }
+  }
+  
+}

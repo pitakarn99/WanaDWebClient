@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Events\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <None Remove="Events\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+    <Compile Remove="DatabaseExtensions.cs" />
+    <Compile Remove="DiscountStringCalculator.cs" />
+    <Compile Remove="DummyValidator.cs" />
+    <Compile Remove="EnumDisplayNameAttribute.cs" />
+    <Compile Remove="EventNotFoundException.cs" />
+    <Compile Remove="FullOuterJoinExtension.cs" />
+    <Compile Remove="MD5Extension.cs" />
+    <Compile Remove="NewInstanceLifetimeManager.cs" />
+    <Compile Remove="PasswordHelper.cs" />
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+    <Compile Remove="TransferValidatorAttribute.cs" />
+    <Compile Remove="UnityExtension.cs" />
+    <Compile Remove="ValidationException.cs" />
+    <Compile Remove="WorkflowExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Fs.Core%28NetStandard%29.project.json" />
+    <None Remove="Fs.Core%28NetStandard%29.project.lock.json" />
+    <None Remove="packages.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.3.0" />
+    <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>

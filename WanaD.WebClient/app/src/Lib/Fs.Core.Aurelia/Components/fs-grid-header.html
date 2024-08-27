@@ -1,0 +1,18 @@
+﻿<div scope="col" click.trigger="DataContext.SortingChangedAsync(SortingName)">
+  <span
+    style="font-weight: bold"
+    if.bind="TranslateKey != null"
+    t="${TranslateKey}"
+  ></span>
+  <span style="font-weight: bold" if.bind="TranslateKey == null"
+    >${DisplayName}</span
+  >
+  <i
+    class="fa fa-caret-up"
+    show.bind="DataContext.GetSortingStatus(SortingName,DataContext.SearchResultCollectionView) == 0"
+  ></i>
+  <i
+    class="fa fa-caret-down"
+    show.bind="DataContext.GetSortingStatus(SortingName,DataContext.SearchResultCollectionView) == 1"
+  ></i>
+</div>

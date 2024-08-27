@@ -1,0 +1,5 @@
+*.vs
+Build
+*obj
+*bin
+*.svn

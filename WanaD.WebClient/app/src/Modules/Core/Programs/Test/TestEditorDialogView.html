@@ -1,0 +1,16 @@
+﻿<ul>
+  <li
+    style="color: red"
+    repeat.for="error of ValidationController.results"
+    if.bind="!error.valid"
+  >
+    ${error}
+  </li>
+</ul>
+<div>
+  <input value.bind="Code & validate" style="width: 100%" />
+</div>
+
+<div>
+  <input value.bind="Name & validate" style="width: 100%" />
+</div>

@@ -1,0 +1,253 @@
+﻿<require from="Lib/Fs.Core.Aurelia/Components/fs-paging"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-grid-header"></require>
+<require from="Lib/Fs.Core.Aurelia/NumberFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/DateFormat"></require>
+<require from="Lib/Fs.Core.Aurelia/Components/fs-datetime-picker"></require>
+
+<div class="card card-all">
+    <div class="kt-portlet__head-label">
+        <h3 class="kt-portlet__head-title">
+            Farm Information
+        </h3>
+    </div>
+
+    <br />
+
+    <div>
+        <h4 style="color: #628369;">General Information:</h4>
+    </div>
+
+    <br />
+
+    <div id="row1" class="row">
+        <div class="col-2">Farm Name <span class="require">*</span> :</div>
+        <div class="col-4">
+            <input type="text" class.bind="NameErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="Name & validate" disabled.bind="!IsEditing" validation-errors.from-view="NameErrors">
+            <span repeat.for="error of NameErrors" class="require">${error.result.message}</span>
+        </div>
+
+        <div class="col-2">Location <span class="require">*</span> : </div>
+        <div class="col-4">
+
+            <div class="input-group">
+                <input type="text" class.bind="LatLongNameErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="LatLongName & validate" disabled validation-errors.from-view="LatLongNameErrors" placeholder="Latitude,Longitude">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#MapModal" disabled.bind="!IsEditing">Button</button>
+                </div>
+
+            </div>
+            <span repeat.for="error of LatLongNameErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <div id="row2" class="row mt-3">
+        <div class="col-2">Farm Owner <span class="require">*</span> :</div>
+        <div class="col-4">
+            <input type="text" class.bind="OwnerNameErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="OwnerName & validate" disabled.bind="!IsEditing" validation-errors.from-view="OwnerNameErrors">
+            <span repeat.for="error of OwnerNameErrors" class="require">${error.result.message}</span>
+        </div>
+        <div class="col-2">Date of Birth <span class="require">*</span> : </div>
+        <div class="col-4" validation-errors.from-view="DateOfBirthErrors">
+            <fs-datetime-picker class.bind="DateOfBirthErrors.length==0? '':'datetimepicker-is-invalid'"
+                                style="text-align: center"
+                                display-name="Date"
+                                sorting-name="Date"
+                                onkeydown="return false"
+                                icon-base="font-awesome"
+                                with-date-icon="true"
+                                placeholder="Input Date Of Birth"
+                                model.bind="DateOfBirth & validate"
+                                show.bind="IsEditing"
+                                button-class="btn btn-primary btn-sm"
+                                options.bind="{ format: 'D/MM/YYYY',useCurrent: false }">
+            </fs-datetime-picker>
+            <div show.bind="!IsEditing"><input type="text" class="form-control" value.bind="DateOfBirth | dateFormat:'D/M/YYYY'" disabled /></div>
+            <span repeat.for="error of DateOfBirthErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <div id="row3" class="row mt-3">
+        <div class="col-2">Religion <span class="require">*</span> :</div>
+        <div class="col-4">
+            <select class.bind="ReligionIdErrors.length==0 ? 'form-control':'form-control is-invalid'" value.bind="ReligionId & validate" disabled.bind="!IsEditing" validation-errors.from-view="ReligionIdErrors">
+                <option value.bind="">-- กรุณาเลือก --</option>
+                <option repeat.for="item of ReligionDatas" model.bind="item.Id" selected>
+                    ${item.DisplayName}
+                </option>
+            </select>
+            <span repeat.for="error of ReligionIdErrors" class="require">${error.result.message}</span>
+        </div>
+        <div class="col-2">Ethnicity <span class="require">*</span> : </div>
+        <div class="col-4">
+            <select class.bind="EthnicityIdErrors.length==0 ? 'form-control':'form-control is-invalid'" value.bind="EthnicityId & validate" disabled.bind="!IsEditing" validation-errors.from-view="EthnicityIdErrors">
+                <option value.bind="">-- กรุณาเลือก --</option>
+                <option repeat.for="item of EthnicityDatas" model.bind="item.Id" selected>
+                    ${item.DisplayName}
+                </option>
+            </select>
+            <span repeat.for="error of EthnicityIdErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <div id="row4" class="row mt-3">
+        <div class="col-2">Phone Number <span class="require">*</span> :</div>
+        <div class="col-4">
+            <input type="text" class.bind="PhoneNumberErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="PhoneNumber & validate" disabled.bind="!IsEditing" validation-errors.from-view="PhoneNumberErrors">
+            <span repeat.for="error of PhoneNumberErrors" class="require">${error.result.message}</span>
+        </div>
+        <div class="col-2">ID Number <span class="require">*</span> : </div>
+        <div class="col-4">
+            <input type="text" class.bind="IDNumberErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="IDNumber & validate" disabled.bind="!IsEditing" validation-errors.from-view="IDNumberErrors">
+            <span repeat.for="error of IDNumberErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <div id="row5" class="row mt-3">
+        <div class="col-2">Gender <span class="require">*</span> :</div>
+        <div class="col-4">
+            <div validation-errors.from-view="GenderErrors">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" checked.bind="Gender" model.bind="1" disabled.bind="!IsEditing">
+                    <label class="form-check-label" for="exampleRadios1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="Female" checked.bind="Gender" model.bind="2" disabled.bind="!IsEditing">
+                    <label class="form-check-label" for="exampleRadios1">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="NotSpecified" checked.bind="Gender" model.bind="3" disabled.bind="!IsEditing">
+                    <label class="form-check-label" for="exampleRadios1">Not Specified</label>
+                </div>
+                <input type="hidden" value.bind="Gender & validate" />
+            </div>
+            <span repeat.for="error of GenderErrors" class="require d-block">${error.result.message}</span>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="IsThaiNationality" checked.bind="IsThaiNationality" model.bind="true" disabled.bind="!IsEditing">
+                <label class="form-check-label" for="defaultCheck1">
+                    Do not have Thai Nationality
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="row6" class="row mt-3">
+        <div class="col-2">Address <span class="require">*</span> :</div>
+        <div class="col">
+            <textarea class.bind="AddressErrors.length==0? 'form-control':'form-control is-invalid'" rows="3" value.bind="Address & validate" disabled.bind="!IsEditing" validation-errors.from-view="AddressErrors"></textarea>
+            <span repeat.for="error of AddressErrors" class="require">${error.result.message}</span>
+        </div>
+    </div>
+
+    <br />
+    <div id="button-section" class="d-flex justify-content-between">
+        <div id="div-back-page">
+            <button class="btn btn-primary" click.trigger="BackPage()">Back</button>
+        </div>
+        <div id="div-add-data" style="text-align:right">
+            <button class="btn btn-outline-secondary me-2" disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="CancelAsync()">Cancel</button>
+            <button class="btn btn-primary " disabled.bind="!$this.IsEditing" show.bind="$this.IsEditing" click.trigger="SaveData()">Save</button>
+            <button class="btn btn-primary" disabled.bind="$this.IsEditing" show.bind="!$this.IsEditing" click.trigger="BeginEdit()">Edit</button>
+        </div>
+    </div>
+
+</div>
+
+
+<br />
+<br />
+
+
+<div id="tab-section" class="none-card-all" show.bind="FarmId != null">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation" style="padding-right: 10px;">
+            <button class="nav-link active font-18px" id="PlotSearchVM-tab" data-bs-toggle="tab" data-bs-target="#PlotSearchVM-tab-pane" type="button" role="tab" aria-controls="PlotSearchVM-tab-pane" aria-selected="true">Plot</button>
+        </li>
+        <li class="nav-item" role="presentation" style="padding-right: 10px;">
+            <button class="nav-link font-18px" id="DeviceView-tab" data-bs-toggle="tab" data-bs-target="#DeviceView-tab-pane" type="button" role="tab" aria-controls="DeviceView-tab-pane" aria-selected="false">Device</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link font-18px" id="ResponsiblePersonView-tab" data-bs-toggle="tab" data-bs-target="#ResponsiblePersonView-tab-pane" type="button" role="tab" aria-controls="ResponsiblePersonView-tab-pane" aria-selected="false">Responsible person</button>
+        </li>
+    </ul>
+
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="PlotSearchVM-tab-pane" role="tabpanel" aria-labelledby="PlotSearchVM-tab" tabindex="0">
+            <au-compose if.bind="PlotSearchVM != null" component.bind="PlotSearchVM"></au-compose>
+        </div>
+        <div class="tab-pane fade" id="DeviceView-tab-pane" role="tabpanel" aria-labelledby="DeviceView-tab" tabindex="0">
+            <au-compose if.bind="DeviceSearchVM != null" component.bind="DeviceSearchVM"></au-compose>
+        </div>
+        <div class="tab-pane fade" id="ResponsiblePersonView-tab-pane" role="tabpanel" aria-labelledby="ResponsiblePersonView-tab" tabindex="0">
+            <au-compose if.bind="ResponsiblePersonSearchVM != null" component.bind="ResponsiblePersonSearchVM"></au-compose>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" id="MapModal" aria-labelledby="MapModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add Location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row font-18px">Search Location </div>
+                <div class="row mt-3" id="row2" style="justify-content: center;">
+                    <div class="col-2">Search : </div>
+                    <div class="col-5"><input type="text" class="form-control" value.bind="NameLocation"></div>
+                    <div class="col-3"></div>
+                    <div class="col-2"><div class="btn btn-outline-primary" click.trigger="search()">ค้นหา</div></div>
+                </div>
+                <div class="row mt-3" id="row2" style="justify-content: center;">
+                    <div class="col-2">Latitude : </div>
+                    <div class="col-4"><input type="number" class="form-control" value.bind="latitudemap" disabled></div>
+                    <div class="col-2">Longitude : </div>
+                    <div class="col-4"><input type="number" class="form-control" value.bind="longitudemap" disabled></div>
+                </div>
+                <div class="row mt-3 font-18px">Search UTM </div>
+                <div class="row" id="row2" style="justify-content: center;">
+                    <div class="col-2">Easting : </div>
+                    <div class="col-4"><input type="number" class="form-control" value.bind="Easting">  <span show.bind="EastingError" class="require">${EastingErrorMessage}</span></div>
+                    <div class="col-2">Northing : </div>
+                    <div class="col-4"><input type="number" class="form-control" value.bind="Northing"><span show.bind="NorthingError" class="require">${NorthingErrorMessage}</span></div>
+                </div>
+
+                <div class="row mt-3" id="row2" style="justify-content: center;">
+                    <div class="col-2">Zone Number : </div>
+                    <div class="col-4"><input type="number" class="form-control" value.bind="ZoneNumber"><span show.bind="ZoneNumberError" class="require">${ZoneNumberErrorMessage}</span></div>
+                    <div class="col-2">Zone Letter : </div>
+                    <div class="col-4"><input type="text" class="form-control" value.bind="ZoneLetter"><span show.bind="ZoneLetterError" class="require">${ZoneLetterErrorMessage}</span></div>
+                </div>
+                <div class="btn btn-outline-primary" click.trigger="GoToUTM()">Go To UTM Location</div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <div>Search results</div>
+                        <div repeat.for="item of ListMap" class="card p-3" click.trigger="selectmap(item)">
+                            <h4>${item.name}</h4>
+                            <span>${item.display_name}</span>
+                        </div>
+                        <span>Search results : ${ListMap.length}</span>
+                    </div>
+                    <div class="col-6"><div id="map" class="map" style="height: 50vh; width: 100%"></div></div>
+                    <div id="marker" title="Marker"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" click.trigger="selectLocation()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

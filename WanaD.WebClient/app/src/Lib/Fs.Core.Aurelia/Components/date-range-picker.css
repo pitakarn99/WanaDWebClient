@@ -1,0 +1,20 @@
+﻿.date-range-picker {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date-range-picker::after {
+  /*font-family: FontAwesome;*/
+  font-family: "Font Awesome 5 Free";
+  content: "\f073";
+  padding-left: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.date-range-picker .date-range {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

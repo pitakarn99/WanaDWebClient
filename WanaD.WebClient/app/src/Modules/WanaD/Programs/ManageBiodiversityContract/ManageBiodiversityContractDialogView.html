@@ -1,0 +1,70 @@
+﻿<div class="row">
+    <div class="col-3 mt-2 mt-2">Contract No.   :</div>
+    <div class="col-3 mt-2"> <input class="form-control" value.bind="viewModel.ContractNo" disabled /></div>
+    <div class="col-3 mt-2">Status</div>
+    <div class="col-3 mt-2"> <input class="form-control" value.bind="viewModel.Status" disabled /></div>
+    <div class="col-3 mt-2">Start date <span class="require">*</span></div>
+    <div class="col-9 mt-2" validation-errors.from-view="viewModel.StartDateErrors">
+        <fs-datetime-picker class.bind="viewModel.StartDateErrors.length==0? '':'datetimepicker-is-invalid'"
+                            style="text-align: center"
+                            display-name="Date"
+                            sorting-name="Date"
+                            onkeydown="return false"
+                            icon-base="font-awesome"
+                            with-date-icon="true"
+                            placeholder=""
+                            button-class="btn btn-primary"
+                            show.bind="IsEditing"
+                            model.bind="viewModel.StartDate & validate"
+                            options.bind="{ format: 'D/M/YYYY',useCurrent: false }">
+        </fs-datetime-picker>
+        <span show.bind="!IsEditing" class="form-control thisdisabled">${viewModel.StartDate | dateFormat:'D/M/YYYY'}</span>
+    </div>
+    <div class="col-3 mt-2">End date <span class="require">*</span></div>
+    <div class="col-9 mt-2" validation-errors.from-view="viewModel.EndDateErrors">
+        <fs-datetime-picker class.bind="viewModel.EndDateErrors.length==0? '':'datetimepicker-is-invalid'"
+                            style="text-align: center"
+                            display-name="Date"
+                            sorting-name="Date"
+                            onkeydown="return false"
+                            icon-base="font-awesome"
+                            with-date-icon="true"
+                            placeholder=""
+                            button-class="btn btn-primary"
+                            show.bind="IsEditing"
+                            model.bind="viewModel.EndDate & validate"
+                            options.bind="{ format: 'D/M/YYYY',useCurrent: false }">
+        </fs-datetime-picker>
+        <span show.bind="!IsEditing" class="form-control thisdisabled">${viewModel.EndDate | dateFormat:'D/M/YYYY'}</span>
+    </div>
+
+    <div class="col-3 mt-2">Farm Name <span class="require">*</span></div>
+    <div class="col-9 mt-2" validation-errors.from-view="viewModel.FarmErrors" class.bind="viewModel.FarmErrors.length==0? '':'select2-is-invalid'">
+    
+        <select2 search-auto-complete-function.bind="e=>FindFarmAsync(e)"
+                 calculate-item-id="FarmId"
+                 calculate-item-text="FarmName"               
+                 name="SingleAuto2"
+                 is-multiple.bind="false"
+                 placeholder="Select"
+                 selected-items.bind="viewModel.Farm & validate"></select2></div>
+    <div class="col-3 mt-2">Plot <span class="require">*</span></div>
+    <div class="col-9 mt-2" validation-errors.from-view="viewModel.PlotItemErrors" class.bind="viewModel.PlotItemErrors.length==0? '':'select2-is-invalid'">
+        <select2 name="Single"
+                 placeholder="Select"
+                 calculate-item-id="Id"
+                 calculate-item-text="Name"
+                 items.bind="viewModel.Farm.PlotDatas"
+                 selected-items.bind="viewModel.PlotItem & validate"></select2>
+    </div>
+    <div class="col-3 mt-2">Owner</div>
+    <div class="col-9 mt-2"> <input class="form-control" value.bind="viewModel.Farm.OwnerName" disabled /></div>
+    <div class="col-3 mt-2">Area</div>
+    <div class="col-9 mt-2"> <input class="form-control" value.bind="viewModel.PlotItem.Area" disabled /></div>
+    <div class="col-3 mt-2">Factor <span class="require">*</span></div>
+    <div class="col-9 mt-2"> <input class="form-control" value.bind="viewModel.Factor" /></div>
+    <div class="col-3 mt-2">Amount</div>
+    <div class="col-9 mt-2"> <input class="form-control" value.bind="viewModel.PlotItem.Area * viewModel.Factor" disabled /></div>
+    <div class="col-3 mt-2">Minimum score <span class="require">*</span></div>
+    <div class="col-9 mt-2"> <input class="form-control" value.bind="viewModel.MinimumScore" /></div>
+</div>

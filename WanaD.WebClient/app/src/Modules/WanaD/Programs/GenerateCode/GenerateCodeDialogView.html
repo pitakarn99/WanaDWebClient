@@ -1,0 +1,40 @@
+﻿
+<div class="row" id="row1" style="justify-content: center;">
+    <div class="col-5">Group <span class="require">*</span> :</div>
+    <div class="col-5" validation-errors.from-view="viewModel.GroupRequestErrors" class.bind="viewModel.GroupRequestErrors.length==0? '':'select2-is-invalid'">
+        <select2 
+                 name="Single"
+                 placeholder="Farm / Factory"
+                 calculate-item-id="Code"
+                 calculate-item-text="Name"
+                 items.bind="viewModel.OptionsSingle"
+                 selected-values.bind="viewModel.GroupRequest & validate"></select2>
+        <span repeat.for="error of viewModel.GroupRequestErrors" class="require">${error.result.message}</span>
+    </div>
+
+</div>
+
+<div class="row mt-3" id="row2" style="justify-content: center;">
+    <div class="col-5">Name <span class="require">*</span> : </div>
+    <div class="col-5" validation-errors.from-view="viewModel.RegIdRequestErrors" class.bind="viewModel.RegIdRequestErrors.length==0? '':'select2-is-invalid'">
+        <select2 
+                 search-auto-complete-function.bind="e=>FindBrands(e)"
+                 calculate-item-id="Id"
+                 calculate-item-text="Name"
+                 disabled.bind="viewModel.GroupRequest == ''"
+                 name="SingleAuto2"
+                 is-multiple.bind="false"
+                 placeholder="Select"
+                 selected-values.bind="viewModel.RegIdRequest & validate"></select2>
+        <span repeat.for="error of viewModel.RegIdRequestErrors" class="require">${error.result.message}</span>
+    </div>
+</div>
+
+<div class="row mt-3" id="row3" style="justify-content: center;">
+    <div class="col-5">Quantity <span class="require">*</span> : </div>
+    <div class="col-5">
+        <input type="number" class.bind="viewModel.QuantityRequestErrors.length==0? 'form-control':'form-control is-invalid'" value.bind="viewModel.QuantityRequest & validate" validation-errors.from-view="viewModel.QuantityRequestErrors">
+        <span repeat.for="error of viewModel.QuantityRequestErrors" class="require">${error.result.message}</span>
+    </div>
+    
+</div>
